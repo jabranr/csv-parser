@@ -6,7 +6,7 @@
  * Parse CSV data from a file, stream or string
  *
  * @author: hello@jabran.me
- * @version: 1.0.0
+ * @version: 1.0.1
  * @license: MIT License
  * @link: https://github.com/jabranr/csv-parser
  */

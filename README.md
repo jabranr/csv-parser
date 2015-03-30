@@ -11,7 +11,7 @@ Install using [composer](http://getcomposer.org)
 
 {
   "require": {
-    "jabranr/csv_parser": ">=1.0.0"
+    "jabranr/csv-parser": ">=1.0.0"
   }
 }
 ```
