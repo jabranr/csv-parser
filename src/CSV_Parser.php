@@ -6,7 +6,7 @@
  * Parse CSV data from a file, stream or string
  *
  * @author: hello@jabran.me
- * @version: 1.0.1
+ * @version: 2.0.1
  * @license: MIT License
  * @link: https://github.com/jabranr/csv-parser
  */
@@ -60,7 +60,7 @@ class CSV_Parser {
 
 	/**
 	 * Get data from simple string
-	 * 
+	 *
 	 * @param string $str
 	 * @return object|class
 	 */
@@ -71,46 +71,95 @@ class CSV_Parser {
 	}
 
 
-
 	/**
 	 * Parse data
-	 * 
+	 *
 	 * @return array
 	 */
 	public function parse( $headers = true ) {
 		if ( ! $this->data )
 			return array();
 
-		$data = array();
-		
-		if ( strpos($this->data, ';') !== false ) {
-			$lines = explode(';', $this->data);
+		// Make columns
+		$this->makeColumns();
+
+		// Make rows with header
+		if ( $headers )
+			return $this->makeRowsWithHeader();
+
+		// Make rows without header
+		return $this->makeRows();
+	}
+
+
+	/**
+	 * Split data for line breaks to make columns
+	 *
+	 * @return array
+	 */
+	private function makeColumns() {
+		if ( ! $this->data )
+			return array();
+
+		if ( preg_match('/[^\x20-\x7f]/', $this->data) ) {
+			$this->data = preg_split('/[^\x20-\x7f]/', $this->data);
+		}
+		else if ( strpos($this->data, ';') !== false ) {
+			$this->data = explode(';', $this->data);
 		}
 		else {
-			$lines = explode('\n', $this->data);
+			$this->data = explode('\n', $this->data);
 		}
 
+		return $this;
+	}
+
+
+	/**
+	 * Make an optional header row
+	 *
+	 * @return array
+	 */
+	private function makeRowsWithHeader() {
 		$data = array();
-		if ( $lines && count($lines) ) {
-			$arr = array();
-			foreach ($lines as $line) {
-				$arr[] = str_getcsv($line, ',');
-			}
+		if ( ! $this->data || ! is_array($this->data) )
+			return $data;
 
-			if ( $headers ) {
-				$this->headers = $arr[0];
-				array_shift($arr);
+		if ( count($this->data) ) {
+			$rows = $this->makeRows();
+			$this->headers = $rows[0];
+			array_shift($rows);
 
-				foreach ($arr as $dataArr) {
-					$data[] = array_combine($this->headers, $dataArr);
-				}
-			}
-			else {
-				$data = $arr;
+			foreach ($rows as $row) {
+
+				// Ignore rows that do not have same length
+				if ( count($this->headers) !== count($row) )
+					continue;
+
+				$data[] = array_combine($this->headers, $row);
 			}
 		}
 
 		return $data;
 	}
 
+
+	/**
+	 * Make rows
+	 *
+	 * @return array
+	 */
+	private function makeRows() {
+		$data = array();
+
+		if ( ! $this->data || ! is_array($this->data) )
+			return $data;
+
+		if ( count($this->data) ) {
+			foreach ($this->data as $rows) {
+				$data[] = str_getcsv($rows, ',');
+			}
+		}
+		return $data;
+	}
 }
