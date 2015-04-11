@@ -1,6 +1,5 @@
 # CSV Parser (PHP)
-
-PHP parser to parse CSV data from a file, stream or string
+PHP client to parse CSV data from a file, stream or string into indexed or associative arrays.
 
 
 # Install
@@ -59,7 +58,7 @@ Parse data for output
 $csv->parse( $headers );
 ```
 
-# Examples
+# Example
 
 Example input string
 ```php
