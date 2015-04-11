@@ -95,3 +95,5 @@ Array(
 
 # License
 &copy; 2015 MIT License - [Jabran Rafique](http://jabran.me)
+
+[![Analytics](https://ga-beacon.appspot.com/UA-50688851-1/csv-parser)](https://github.com/igrigorik/ga-beacon)
