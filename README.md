@@ -1,6 +1,7 @@
 # CSV Parser (PHP)
-PHP client to parse CSV data from a file, stream or string into indexed or associative arrays.
+PHP client to parse CSV data from a path, file, stream, resource or string into indexed or associative arrays.
 
+> Namespaces added in v2.0.2 so make sure you update your code before updating to the latest version.
 
 # Install
 Install using [composer](http://getcomposer.org)
@@ -10,7 +11,7 @@ Install using [composer](http://getcomposer.org)
 
 {
   "require": {
-    "jabranr/csv-parser": ">=1.0.0"
+    "jabranr/csv-parser": ">=2.0.*"
   }
 }
 ```
@@ -23,7 +24,7 @@ $ comsposer install
 # Use
 Initiate a new instance
 ```php
-$csv = new CSV_Parser();
+$csv = new \Jabran\CSV_Parser();
 ```
 
 # API
@@ -34,22 +35,34 @@ Get data from a string
 $csv->fromString( $str );
 ```
 
-Get data from a stream
+Get data from a stream (Will be deprecated in future)
 ```php
-/* @param: stream $stream (e.g. php://input) */
+/* @param: resource $stream (f.e. php://input) */
 $csv->fromStream( $stream );
 ```
 
-Get data from a file
+Get data from a resource (Since v2.0.2)
 ```php
-/* @param: file $file */
+/* @param: resource $resource (f.e. resource created using fopen()) */
+$csv->fromResource( $resource );
+```
+
+Get data from a file path (Will be deprecated in future)
+```php
+/* @param: string $file */
 $csv->fromFile( $file );
+```
+
+Get data from a path/URL (Since v2.0.2)
+```php
+/* @param: string $path */
+$csv->fromPath( $path );
 ```
 
 Parse data for output
 ```php
-/** 
- * Set $headers true/false to include top/first row 
+/**
+ * Set $headers true/false to include top/first row
  * and output an associative array
  *
  * @param: boolean $headers (Default: true)
@@ -58,10 +71,57 @@ Parse data for output
 $csv->parse( $headers );
 ```
 
+More useful methods (Since v2.0.2)
+
+```php
+/**
+ * Set columns
+ * @param array $columns
+ * @return \Jabran\CSV_Parser
+ */
+$csv->setColumns( $columns );
+
+/**
+ * Set rows
+ * @param array $rows
+ * @return \Jabran\CSV_Parser
+ */
+$csv->setRows( $rows );
+
+/**
+ * Set headers
+ * @param array $headers
+ * @return \Jabran\CSV_Parser
+ */
+$csv->setHeaders( $headers );
+
+/**
+ * Get columns
+ * @return array
+ */
+$csv->getColumns();
+
+/**
+ * Get rows
+ * @return array
+ */
+$csv->getRows();
+
+/**
+ * Get headers
+ * @return array
+ */
+$csv->getHeaders();
+```
+
 # Example
 
 Example input string
 ```php
+require 'path/to/vendor/autoload.php';
+
+$csv = new \Jabran\CSV_Parser;
+
 $str = 'id,first_name,last_name;1,Jabran,Rafique';
 
 $csv->fromString( $str );

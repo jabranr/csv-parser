@@ -11,9 +11,9 @@
 
 spl_autoload_register(function( $class )	{
 
-	$prefix = '';
+	$prefix = 'Jabran\\';
 
-	$base_dir = defined('CLASS_SRC_DIR') ? CLASS_SRC_DIR : dirname(__FILE__);
+	$base_dir = defined('CLASS_SRC_DIR') ? CLASS_SRC_DIR : dirname(__FILE__) . '/src';
 
 	$len = strlen($prefix);
 
@@ -24,9 +24,9 @@ spl_autoload_register(function( $class )	{
 	$rel_class = substr($class, $len);
 
 	$file = $base_dir . DIRECTORY_SEPARATOR . str_replace('\\', '/', $rel_class) . '.php';
-	
+
 	if ( file_exists($file) ) {
 		require $file;
 	}
-	
+
 });
