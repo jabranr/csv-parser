@@ -5,14 +5,6 @@
  */
 
 use \Jabran\CSV_Parser;
-use \Jabran\Exception\InvalidPathException;
-use \Jabran\Exception\InvalidDataException;
-use \Jabran\Exception\EmptyResourceException;
-use \Jabran\Exception\InvalidAccessException;
-use \Jabran\Exception\InvalidArgumentException;
-use \Jabran\Exception\InvalidDataTypeException;
-use \Jabran\Exception\InvalidResourceException;
-use \Jabran\Exception\UnreadableResourceException;
 
 class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 
