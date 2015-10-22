@@ -22,7 +22,7 @@
     "autoload": {
         "psr-4": {
             "Jabran\\": "src",
-            "Jabran\\Exception\\": "src/exception",
+            "Jabran\\Exception\\": "src/exception"
         }
     },
     "autoload-dev": {
