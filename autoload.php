@@ -1,32 +1,41 @@
 <?php
-
 /**
- * Autoload file
+ * An example of a project-specific implementation.
  *
- * You will not need this if you are using Composer.
- * https://getcomposer.org
+ * After registering this autoload function with SPL, the following line
+ * would cause the function to attempt to load the \Foo\Bar\Baz\Qux class
+ * from /path/to/project/src/Baz/Qux.php:
  *
- * PSR-4 standard: http://www.php-fig.org/psr/psr-4/
+ *      new \Foo\Bar\Baz\Qux;
+ *
+ * @param string $class The fully-qualified class name.
+ * @return void
  */
+spl_autoload_register(function ($class) {
 
-spl_autoload_register(function( $class )	{
+    // project-specific namespace prefix
+    $prefix = 'Jabran\\';
 
-	$prefix = 'Jabran\\';
+    // base directory for the namespace prefix
+    $base_dir = __DIR__ . '/src/';
 
-	$base_dir = defined('CLASS_SRC_DIR') ? CLASS_SRC_DIR : dirname(__FILE__) . '/src';
+    // does the class use the namespace prefix?
+    $len = strlen($prefix);
+    if (strncmp($prefix, $class, $len) !== 0) {
+        // no, move to the next registered autoloader
+        return;
+    }
 
-	$len = strlen($prefix);
+    // get the relative class name
+    $relative_class = substr($class, $len);
 
-	if ( strncmp($prefix, $class, $len) !== 0 ) {
-		return;
-	}
+    // replace the namespace prefix with the base directory, replace namespace
+    // separators with directory separators in the relative class name, append
+    // with .php
+    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
 
-	$rel_class = substr($class, $len);
-
-	$file = $base_dir . DIRECTORY_SEPARATOR . str_replace('\\', '/', $rel_class) . '.php';
-
-	if ( file_exists($file) ) {
-		require $file;
-	}
-
+    // if the file exists, require it
+    if (file_exists($file)) {
+        require $file;
+    }
 });
