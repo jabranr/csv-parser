@@ -1,3 +1,6 @@
+# Use Travis CI's faster Docker-based infrastructure.
+sudo: false
+
 language: php
  
 php:
