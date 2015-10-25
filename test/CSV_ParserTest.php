@@ -17,9 +17,6 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 	/* @var array Sample data output */
 	public $sampleOutput;
 
-	/* @var array Sample empty output */
-	public $sampleEmptyOutput;
-
 	/* @var string Sample data file */
 	public $sampleDataFile;
 
@@ -32,7 +29,6 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 	public function setUp() {
 		$this->csv = new CSV_Parser;
 		$this->sampleInput = 'name,homepage;CSV_Parser,https://github.com/jabranr/csv-parser';
-		$this->sampleEmptyOutput = array();
 		$this->sampleDataFile = __DIR__ . '/foo.txt';
 		$this->sampleEmptyFile = __DIR__ . '/bar.txt';
 		$this->sampleOutput = array(
@@ -49,7 +45,6 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 	public function tearDown() {
 		unset($this->csv);
 		unset($this->sampleInput);
-		unset($this->sampleEmptyOutput);
 		unset($this->sampleDataFile);
 		unset($this->sampleEmptyFile);
 		unset($this->sampleOutput);
@@ -59,8 +54,7 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 	 * Create sample PHP input stream
 	 */
 	public function sampleStream() {
-		$resource = fopen($this->sampleDataFile, 'rb');
-		return $resource;
+		return fopen($this->sampleDataFile, 'rb');
 	}
 
 	/**
