@@ -23,15 +23,5 @@
         "psr-4": {
             "Jabran\\": "src"
         }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Jabran\\Test\\": "test"
-        }
-    },
-    "ignore": [
-        "**/.*",
-        "test",
-        "tests"
-    ]
+    }
 }
