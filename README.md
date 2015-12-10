@@ -1,4 +1,4 @@
-# CSV Parser (PHP)  [![Build Status](https://travis-ci.org/jabranr/csv-parser.svg?branch=master)](https://travis-ci.org/jabranr/csv-parser) [![Latest Stable Version](https://poser.pugx.org/csv-parser/csv-parser/v/stable.svg)](https://packagist.org/packages/csv-parser/csv-parser) [![Total Downloads](https://poser.pugx.org/csv-parser/csv-parser/downloads.svg)](https://packagist.org/packages/jabranr/csv-parser)
+# CSV Parser (PHP)  [![Build Status](https://travis-ci.org/jabranr/csv-parser.svg?branch=master)](https://travis-ci.org/jabranr/csv-parser) [![Latest Stable Version](https://poser.pugx.org/jabranr/csv-parser/v/stable.svg)](https://packagist.org/packages/csv-parser/csv-parser) [![Total Downloads](https://poser.pugx.org/jabranr/csv-parser/downloads.svg)](https://packagist.org/packages/jabranr/csv-parser)
 
 PHP client to parse CSV data from a path, file, stream, resource or string into indexed or associative arrays.
 
