@@ -1,4 +1,4 @@
-<?php namespace Jabran\Test\Exception;
+<?php namespace Jabran\Tests\Exception;
 
 /**
  * InvalidDataException

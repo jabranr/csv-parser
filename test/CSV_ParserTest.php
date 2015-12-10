@@ -1,4 +1,4 @@
-<?php namespace Jabran\Test;
+<?php namespace Jabran\Tests;
 
 /**
  * Unit test for CSV_Parser
@@ -747,7 +747,7 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * Test fromResource method
-	 * @sicne 2.0.2
+	 * @since 2.0.2
 	 * @expectedException \Jabran\Exception\InvalidResourceException
 	 */
 	public function testFromResource_NoArguments() {
@@ -756,7 +756,7 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * Test fromResource method
-	 * @sicne 2.0.2
+	 * @since 2.0.2
 	 * @expectedException \Jabran\Exception\InvalidResourceException
 	 */
 	public function testFromResource_WithArray() {
@@ -765,7 +765,7 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * Test fromResource method
-	 * @sicne 2.0.2
+	 * @since 2.0.2
 	 * @expectedException \Jabran\Exception\InvalidResourceException
 	 */
 	public function testFromResource_WithNumber() {
@@ -774,7 +774,7 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * Test fromResource method
-	 * @sicne 2.0.2
+	 * @since 2.0.2
 	 * @expectedException \Jabran\Exception\InvalidResourceException
 	 */
 	public function testFromResource_WithFloat() {
@@ -783,7 +783,7 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * Test fromResource method
-	 * @sicne 2.0.2
+	 * @since 2.0.2
 	 * @expectedException \Jabran\Exception\InvalidResourceException
 	 */
 	public function testFromResource_WithBoolean() {
@@ -792,7 +792,7 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * Test fromResource method
-	 * @sicne 2.0.2
+	 * @since 2.0.2
 	 * @expectedException \Jabran\Exception\InvalidResourceException
 	 */
 	public function testFromResource_WithString() {
@@ -801,7 +801,7 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * Test fromResource method
-	 * @sicne 2.0.2
+	 * @since 2.0.2
 	 */
 	public function testFromResource_ValidData() {
 		$this->csv->fromResource($this->sampleStream());
@@ -810,7 +810,7 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * Test fromResource method
-	 * @sicne 2.0.2
+	 * @since 2.0.2
 	 * @depends testFromResource_ValidData
 	 */
 	public function testFromResource_DataType() {

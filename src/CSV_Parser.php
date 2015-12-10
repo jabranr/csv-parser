@@ -6,19 +6,19 @@
  * Parse CSV data from a file, path, stream, resource or string
  *
  * @author: Jabran Rafique <hello@jabran.me>
- * @version: 2.0.2
+ * @version: 2.0.3
  * @license: MIT License
  * @link: https://github.com/jabranr/csv-parser
  */
 
-use \Jabran\Exception\InvalidPathException;
-use \Jabran\Exception\InvalidDataException;
-use \Jabran\Exception\EmptyResourceException;
-use \Jabran\Exception\InvalidAccessException;
-use \Jabran\Exception\InvalidArgumentException;
-use \Jabran\Exception\InvalidDataTypeException;
-use \Jabran\Exception\InvalidResourceException;
-use \Jabran\Exception\UnreadableResourceException;
+use Jabran\Exception\InvalidPathException;
+use Jabran\Exception\InvalidDataException;
+use Jabran\Exception\EmptyResourceException;
+use Jabran\Exception\InvalidAccessException;
+use Jabran\Exception\InvalidArgumentException;
+use Jabran\Exception\InvalidDataTypeException;
+use Jabran\Exception\InvalidResourceException;
+use Jabran\Exception\UnreadableResourceException;
 
 class CSV_Parser {
 
@@ -37,7 +37,7 @@ class CSV_Parser {
 	/**
 	 * Setup default values
 	 *
-	 * @return \Jabran\CSV_Parser
+	 * @return Jabran\CSV_Parser
 	 */
 	public function __construct() {
 		$this->setData(null);
@@ -52,9 +52,9 @@ class CSV_Parser {
 	 * Set data
 	 *
 	 * @param string $data
-	 * @throws \Jabran\Exception\InvalidArgumentException
-	 * @throws \Jabran\Exception\InvalidDataException
-	 * @return \Jabran\CSV_Parser
+	 * @throws Jabran\Exception\InvalidArgumentException
+	 * @throws Jabran\Exception\InvalidDataException
+	 * @return Jabran\CSV_Parser
 	 */
 	public function setData($data = null) {
 		if (func_num_args() < 1) {
@@ -82,9 +82,9 @@ class CSV_Parser {
 	 * Set headers
 	 *
 	 * @param array $headers
-	 * @throws \Jabran\Exception\InvalidArgumentException
-	 * @throws \Jabran\Exception\InvalidDataException
-	 * @return \Jabran\CSV_Parser
+	 * @throws Jabran\Exception\InvalidArgumentException
+	 * @throws Jabran\Exception\InvalidDataException
+	 * @return Jabran\CSV_Parser
 	 */
 	public function setHeaders($headers = null) {
 		if (func_num_args() < 1) {
@@ -112,9 +112,9 @@ class CSV_Parser {
 	 * Set columns
 	 *
 	 * @param array $columns
-	 * @throws \Jabran\Exception\InvalidArgumentException
-	 * @throws \Jabran\Exception\InvalidDataException
-	 * @return \Jabran\CSV_Parser
+	 * @throws Jabran\Exception\InvalidArgumentException
+	 * @throws Jabran\Exception\InvalidDataException
+	 * @return Jabran\CSV_Parser
 	 */
 	public function setColumns($columns = null) {
 		if (func_num_args() < 1) {
@@ -142,9 +142,9 @@ class CSV_Parser {
 	 * Set rows
 	 *
 	 * @param array $rows
-	 * @throws \Jabran\Exception\InvalidArgumentException
-	 * @throws \Jabran\Exception\InvalidDataException
-	 * @return \Jabran\CSV_Parser
+	 * @throws Jabran\Exception\InvalidArgumentException
+	 * @throws Jabran\Exception\InvalidDataException
+	 * @return Jabran\CSV_Parser
 	 */
 	public function setRows($rows = null) {
 		if (func_num_args() < 1) {
@@ -172,9 +172,9 @@ class CSV_Parser {
 	 * Get data from a file
 	 *
 	 * @param string $file
-	 * @throws \Jabran\Exception\InvalidPathException
-	 * @throws \Jabran\Exception\InvalidAccessException
-	 * @return \Jabran\CSV_Parser
+	 * @throws Jabran\Exception\InvalidPathException
+	 * @throws Jabran\Exception\InvalidAccessException
+	 * @return Jabran\CSV_Parser
 	 * @todo Eventually deprecate in favor of fromPath method
 	 */
 	public function fromFile($file = null) {
@@ -185,9 +185,9 @@ class CSV_Parser {
 	 * Get data from a path
 	 *
 	 * @param string $path
-	 * @throws \Jabran\Exception\InvalidPathException
-	 * @throws \Jabran\Exception\InvalidAccessException
-	 * @return \Jabran\CSV_Parser
+	 * @throws Jabran\Exception\InvalidPathException
+	 * @throws Jabran\Exception\InvalidAccessException
+	 * @return Jabran\CSV_Parser
 	 * @since 2.0.2
 	 */
 	public function fromPath($path = null) {
@@ -219,9 +219,9 @@ class CSV_Parser {
 	 * Get data from string
 	 *
 	 * @param string $string
-	 * @throws \Jabran\Exception\InvalidDataTypeException
-	 * @throws \Jabran\Exception\EmptyResourceException
-	 * @return \Jabran\CSV_Parser
+	 * @throws Jabran\Exception\InvalidDataTypeException
+	 * @throws Jabran\Exception\EmptyResourceException
+	 * @return Jabran\CSV_Parser
 	 */
 	public function fromString($string = null) {
 		if (null === $string || ! is_string($string)) {
@@ -240,8 +240,8 @@ class CSV_Parser {
 	 * Get data from PHP stream
 	 *
 	 * @param resource $stream
-	 * @throws \Jabran\Exception\InvalidResourceException
-	 * @return \Jabran\CSV_Parser
+	 * @throws Jabran\Exception\InvalidResourceException
+	 * @return Jabran\CSV_Parser
 	 * @todo Eventually deprecate in favor of fromResource method
 	 */
 	public function fromStream($stream = null) {
@@ -252,8 +252,8 @@ class CSV_Parser {
 	 * Get data from a resource
 	 *
 	 * @param resource $resource
-	 * @throws \Jabran\Exception\InvalidResourceException
-	 * @return \Jabran\CSV_Parser
+	 * @throws Jabran\Exception\InvalidResourceException
+	 * @return Jabran\CSV_Parser
 	 * @since 2.0.2
 	 */
 	public function fromResource($resource = null) {
@@ -294,7 +294,7 @@ class CSV_Parser {
 	/**
 	 * Split data for line breaks to make columns
 	 *
-	 * @return \Jabran\CSV_Parser
+	 * @return Jabran\CSV_Parser
 	 */
 	private function _makeColumns() {
 		$data = $this->getData();
@@ -316,7 +316,7 @@ class CSV_Parser {
 	/**
 	 * Make an optional header row
 	 *
-	 * @return \Jabran\CSV_Parser
+	 * @return Jabran\CSV_Parser
 	 */
 	private function _makeRowsWithHeaders() {
 		$columns = $this->getColumns();
@@ -346,7 +346,7 @@ class CSV_Parser {
 	/**
 	 * Make rows
 	 *
-	 * @return \Jabran\CSV_Parser
+	 * @return Jabran\CSV_Parser
 	 */
 	private function _makeRows() {
 		$columns = $this->getColumns();
