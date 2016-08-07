@@ -2,7 +2,7 @@
 <phpunit
     colors="true"
     verbose="true"
-    bootstrap="test/bootstrap.php">
+    bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="CSV Parser Test Suite">
             <directory>./test/</directory>
