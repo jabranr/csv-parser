@@ -2,7 +2,7 @@
 
 PHP client to parse CSV data from a path, file, stream, resource or string into indexed or associative arrays.
 
-> Namespaces added in v2.0.2 so make sure you update your code before updating to the latest version.
+> Namespaces added in v2.0.2 so make sure you update your code before migrating from an older version.
 
 # Install
 Install using [composer](http://getcomposer.org)
@@ -12,7 +12,7 @@ Install using [composer](http://getcomposer.org)
 
 {
   "require": {
-    "jabranr/csv-parser": ">=2.0.*"
+    "jabranr/csv-parser": "~2.0.*"
   }
 }
 ```
@@ -25,7 +25,7 @@ $ comsposer install
 # Use
 Initiate a new instance
 ```php
-$csv = new \Jabran\CSV_Parser();
+$csv = new Jabran\CSV_Parser();
 ```
 
 # API
@@ -78,21 +78,21 @@ More useful methods (Since v2.0.2)
 /**
  * Set columns
  * @param array $columns
- * @return \Jabran\CSV_Parser
+ * @return Jabran\CSV_Parser
  */
 $csv->setColumns( $columns );
 
 /**
  * Set rows
  * @param array $rows
- * @return \Jabran\CSV_Parser
+ * @return Jabran\CSV_Parser
  */
 $csv->setRows( $rows );
 
 /**
  * Set headers
  * @param array $headers
- * @return \Jabran\CSV_Parser
+ * @return Jabran\CSV_Parser
  */
 $csv->setHeaders( $headers );
 
@@ -121,7 +121,7 @@ Example input string
 ```php
 require 'path/to/vendor/autoload.php';
 
-$csv = new \Jabran\CSV_Parser;
+$csv = new Jabran\CSV_Parser;
 
 $str = 'id,first_name,last_name;1,Jabran,Rafique';
 
