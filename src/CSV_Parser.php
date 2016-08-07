@@ -1,15 +1,6 @@
-<?php namespace Jabran;
+<?php
 
-/**
- * CSV_Parser class
- *
- * Parse CSV data from a file, path, stream, resource or string
- *
- * @author: Jabran Rafique <hello@jabran.me>
- * @version: 2.0.3
- * @license: MIT License
- * @link: https://github.com/jabranr/csv-parser
- */
+namespace Jabran;
 
 use Jabran\Exception\InvalidPathException;
 use Jabran\Exception\InvalidDataException;
@@ -20,6 +11,16 @@ use Jabran\Exception\InvalidDataTypeException;
 use Jabran\Exception\InvalidResourceException;
 use Jabran\Exception\UnreadableResourceException;
 
+/**
+ * CSV_Parser class
+ *
+ * Parse CSV data from a file, path, stream, resource or string
+ *
+ * @author: Jabran Rafique <hello@jabran.me>
+ * @version: 2.0.4
+ * @license: MIT License
+ * @link: https://github.com/jabranr/csv-parser
+ */
 class CSV_Parser {
 
 	/* @var string $data */
@@ -37,12 +38,11 @@ class CSV_Parser {
 	/**
 	 * Setup default values
 	 *
-	 * @return Jabran\CSV_Parser
+	 * @return self
 	 */
 	public function __construct() {
 		$this->setData(null);
 		$this->setHeaders(null);
-
 		$this->setRows(null);
 		$this->setColumns(null);
 		return $this;
@@ -54,7 +54,7 @@ class CSV_Parser {
 	 * @param string $data
 	 * @throws Jabran\Exception\InvalidArgumentException
 	 * @throws Jabran\Exception\InvalidDataException
-	 * @return Jabran\CSV_Parser
+	 * @return self
 	 */
 	public function setData($data = null) {
 		if (func_num_args() < 1) {
@@ -84,7 +84,7 @@ class CSV_Parser {
 	 * @param array $headers
 	 * @throws Jabran\Exception\InvalidArgumentException
 	 * @throws Jabran\Exception\InvalidDataException
-	 * @return Jabran\CSV_Parser
+	 * @return self
 	 */
 	public function setHeaders($headers = null) {
 		if (func_num_args() < 1) {
@@ -114,7 +114,7 @@ class CSV_Parser {
 	 * @param array $columns
 	 * @throws Jabran\Exception\InvalidArgumentException
 	 * @throws Jabran\Exception\InvalidDataException
-	 * @return Jabran\CSV_Parser
+	 * @return self
 	 */
 	public function setColumns($columns = null) {
 		if (func_num_args() < 1) {
@@ -144,7 +144,7 @@ class CSV_Parser {
 	 * @param array $rows
 	 * @throws Jabran\Exception\InvalidArgumentException
 	 * @throws Jabran\Exception\InvalidDataException
-	 * @return Jabran\CSV_Parser
+	 * @return self
 	 */
 	public function setRows($rows = null) {
 		if (func_num_args() < 1) {
@@ -174,7 +174,7 @@ class CSV_Parser {
 	 * @param string $file
 	 * @throws Jabran\Exception\InvalidPathException
 	 * @throws Jabran\Exception\InvalidAccessException
-	 * @return Jabran\CSV_Parser
+	 * @return self
 	 * @todo Eventually deprecate in favor of fromPath method
 	 */
 	public function fromFile($file = null) {
@@ -187,7 +187,7 @@ class CSV_Parser {
 	 * @param string $path
 	 * @throws Jabran\Exception\InvalidPathException
 	 * @throws Jabran\Exception\InvalidAccessException
-	 * @return Jabran\CSV_Parser
+	 * @return self
 	 * @since 2.0.2
 	 */
 	public function fromPath($path = null) {
@@ -221,7 +221,7 @@ class CSV_Parser {
 	 * @param string $string
 	 * @throws Jabran\Exception\InvalidDataTypeException
 	 * @throws Jabran\Exception\EmptyResourceException
-	 * @return Jabran\CSV_Parser
+	 * @return self
 	 */
 	public function fromString($string = null) {
 		if (null === $string || ! is_string($string)) {
@@ -241,7 +241,7 @@ class CSV_Parser {
 	 *
 	 * @param resource $stream
 	 * @throws Jabran\Exception\InvalidResourceException
-	 * @return Jabran\CSV_Parser
+	 * @return self
 	 * @todo Eventually deprecate in favor of fromResource method
 	 */
 	public function fromStream($stream = null) {
@@ -253,7 +253,7 @@ class CSV_Parser {
 	 *
 	 * @param resource $resource
 	 * @throws Jabran\Exception\InvalidResourceException
-	 * @return Jabran\CSV_Parser
+	 * @return self
 	 * @since 2.0.2
 	 */
 	public function fromResource($resource = null) {
@@ -294,18 +294,16 @@ class CSV_Parser {
 	/**
 	 * Split data for line breaks to make columns
 	 *
-	 * @return Jabran\CSV_Parser
+	 * @return self
 	 */
 	private function _makeColumns() {
 		$data = $this->getData();
 
 		if (preg_match('/[^\x20-\x7f]/', $data)) {
 			$data = preg_split('/[^\x20-\x7f]/', $data);
-		}
-		else if (false !== strpos($data, ';')) {
+		} else if (false !== strpos($data, ';')) {
 			$data = explode(';', $data);
-		}
-		else {
+		} else {
 			$data = explode('\n', $data);
 		}
 
@@ -316,7 +314,7 @@ class CSV_Parser {
 	/**
 	 * Make an optional header row
 	 *
-	 * @return Jabran\CSV_Parser
+	 * @return self
 	 */
 	private function _makeRowsWithHeaders() {
 		$columns = $this->getColumns();
@@ -333,8 +331,9 @@ class CSV_Parser {
 		foreach ($rows as $row) {
 
 			// Ignore rows that do not have same length
-			if ( count($this->getHeaders()) !== count($row) )
+			if ( count($this->getHeaders()) !== count($row) ) {
 				continue;
+            }
 
 			$rowsWithHeader[] = array_combine($this->getHeaders(), $row);
 		}
@@ -346,7 +345,7 @@ class CSV_Parser {
 	/**
 	 * Make rows
 	 *
-	 * @return Jabran\CSV_Parser
+	 * @return self
 	 */
 	private function _makeRows() {
 		$columns = $this->getColumns();
@@ -364,8 +363,4 @@ class CSV_Parser {
 		$this->setRows($rows);
 		return $this;
 	}
-
 }
-
-
-
