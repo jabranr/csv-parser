@@ -1,15 +1,16 @@
 <?php namespace Jabran\Tests\Exception;
 
+use Jabran\Exception\UnreadableResourceException;
+
 /**
  * UnreadableResourceException
  */
-
 class UnreadableResourceExceptionTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @expectedException \Jabran\Exception\UnreadableResourceException
+	 * @expectedException Jabran\Exception\UnreadableResourceException
 	 */
 	public function testMatchException() {
-		throw new \Jabran\Exception\UnreadableResourceException('foo');
+		throw new UnreadableResourceException('foo');
 	}
 }
