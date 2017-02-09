@@ -432,10 +432,6 @@ class CSV_Parser {
 	 * @return boolean
 	 */
 	private function _isValidEncoding($encoding = null) {
-	    if (in_array($encoding, mb_list_encodings())) {
-		return true;
-	    } else {
-		return false;
-	    }
+	    return in_array($encoding, mb_list_encodings());
 	}
 }
