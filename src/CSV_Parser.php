@@ -3,6 +3,7 @@
 namespace Jabran;
 
 use Jabran\Exception\InvalidPathException;
+use Jabran\Exception\InvalidEncodingException;
 use Jabran\Exception\InvalidDataException;
 use Jabran\Exception\EmptyResourceException;
 use Jabran\Exception\InvalidAccessException;
@@ -26,6 +27,9 @@ class CSV_Parser {
 	/* @var string $data */
 	protected $data;
 
+	/* @var string $encoding */
+	protected $encoding;
+
 	/* @var array $columns */
 	protected $columns;
 
@@ -42,6 +46,7 @@ class CSV_Parser {
 	 */
 	public function __construct() {
 		$this->setData(null);
+		$this->setEncoding('UTF-8');
 		$this->setHeaders(null);
 		$this->setRows(null);
 		$this->setColumns(null);
@@ -76,6 +81,40 @@ class CSV_Parser {
 	 */
 	public function getData() {
 		return $this->data;
+	}
+
+	/**
+	 * Set encoding
+	 *
+	 * @param string $encoding
+	 * @throws Jabran\Exception\InvalidArgumentException
+	 * @throws Jabran\Exception\InvalidEncodingException
+	 * @return self
+	 */
+	public function setEncoding($encoding = null) {
+	    if (func_num_args() < 1) {
+			throw new InvalidArgumentException('Required arguments are missing.');
+	    }
+
+	    if (null !== $encoding && ! is_string($encoding)) {
+			throw new InvalidEncodingException('Unexpected encoding.');
+	    }
+
+	    if ($encoding != $this->_isValidEncoding($encoding)) {
+			throw new InvalidEncodingException('Unsupported character encoding');
+	    }
+
+	    $this->encoding = $encoding;
+	    return $this;
+	}
+
+	/**
+	 * Get encoding
+	 *
+	 * @return string|null
+	 */
+	public function getEncoding() {
+		return $this->encoding;
 	}
 
 	/**
@@ -292,6 +331,29 @@ class CSV_Parser {
 	}
 
 	/**
+	 * Convert character encoding of data
+	 * @throws Jabran\Exception\InvalidEncodingException
+	 * @return self
+	 */
+	public function encode() {
+	    $data = $this->getData();
+	    $this->setData(mb_convert_encoding(
+		$data, 
+		$this->getEncoding(), 
+		mb_detect_encoding($data)
+	    ));
+
+	    if ($this->getEncoding() !== mb_detect_encoding($this->getData())) {
+		throw new InvalidEncodingException(
+		    'Unable to convert character encoding from '. mb_detect_encoding($this->getData()).
+		    ' to '.$this->getEncoding().'.'
+		);
+	    }
+
+	    return $this;
+	}
+
+	/**
 	 * Split data for line breaks to make columns
 	 *
 	 * @return self
@@ -362,5 +424,14 @@ class CSV_Parser {
 
 		$this->setRows($rows);
 		return $this;
+	}
+
+	/**
+	 * Validate character encoding
+	 *
+	 * @return boolean
+	 */
+	private function _isValidEncoding($encoding = null) {
+	    return in_array($encoding, mb_list_encodings());
 	}
 }
