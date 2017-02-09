@@ -1,8 +1,8 @@
-# CSV Parser (PHP)  [![Build Status](https://travis-ci.org/jabranr/csv-parser.svg?branch=master)](https://travis-ci.org/jabranr/csv-parser) [![Latest Stable Version](https://poser.pugx.org/jabranr/csv-parser/v/stable.svg)](https://packagist.org/packages/csv-parser/csv-parser) [![Total Downloads](https://poser.pugx.org/jabranr/csv-parser/downloads.svg)](https://packagist.org/packages/jabranr/csv-parser)
+# CSV Parser (PHP)  [![Build Status](https://travis-ci.org/jabranr/csv-parser.svg?branch=master)](https://travis-ci.org/jabranr/csv-parser) [![Latest Stable Version](https://poser.pugx.org/jabranr/csv-parser/v/stable.svg)](https://packagist.org/packages/jabranr/csv-parser) [![Total Downloads](https://poser.pugx.org/jabranr/csv-parser/downloads.svg)](https://packagist.org/packages/jabranr/csv-parser)
 
 PHP client to parse CSV data from a path, file, stream, resource or string into indexed or associative arrays.
 
-> Namespaces added in v2.0.2 so make sure you update your code before migrating from an older version.
+> Namespaces were added in v2.0.2 so make sure you update your code before migrating from an older version.
 
 # Install
 Install using [composer](http://getcomposer.org)
@@ -12,7 +12,7 @@ Install using [composer](http://getcomposer.org)
 
 {
   "require": {
-    "jabranr/csv-parser": "~2.0.*"
+    "jabranr/csv-parser": "~2.1.*"
   }
 }
 ```
@@ -33,31 +33,31 @@ $csv = new Jabran\CSV_Parser();
 Get data from a string
 ```php
 /* @param: string $str */
-$csv->fromString( $str );
+$csv->fromString($str);
 ```
 
 Get data from a stream (Will be deprecated in future)
 ```php
 /* @param: resource $stream (f.e. php://input) */
-$csv->fromStream( $stream );
+$csv->fromStream($stream);
 ```
 
 Get data from a resource (Since v2.0.2)
 ```php
 /* @param: resource $resource (f.e. resource created using fopen()) */
-$csv->fromResource( $resource );
+$csv->fromResource($resource);
 ```
 
 Get data from a file path (Will be deprecated in future)
 ```php
 /* @param: string $file */
-$csv->fromFile( $file );
+$csv->fromFile($file);
 ```
 
 Get data from a path/URL (Since v2.0.2)
 ```php
 /* @param: string $path */
-$csv->fromPath( $path );
+$csv->fromPath($path);
 ```
 
 Parse data for output
@@ -69,7 +69,7 @@ Parse data for output
  * @param: boolean $headers (Default: true)
  * @return: array
  */
-$csv->parse( $headers );
+$csv->parse($headers);
 ```
 
 More useful methods (Since v2.0.2)
@@ -80,21 +80,21 @@ More useful methods (Since v2.0.2)
  * @param array $columns
  * @return Jabran\CSV_Parser
  */
-$csv->setColumns( $columns );
+$csv->setColumns($columns);
 
 /**
  * Set rows
  * @param array $rows
  * @return Jabran\CSV_Parser
  */
-$csv->setRows( $rows );
+$csv->setRows($rows);
 
 /**
  * Set headers
  * @param array $headers
  * @return Jabran\CSV_Parser
  */
-$csv->setHeaders( $headers );
+$csv->setHeaders($headers);
 
 /**
  * Get columns
@@ -125,7 +125,7 @@ $csv = new Jabran\CSV_Parser;
 
 $str = 'id,first_name,last_name;1,Jabran,Rafique';
 
-$csv->fromString( $str );
+$csv->fromString($str);
 
 // Output with headers:
 $csv->parse();
@@ -137,23 +137,23 @@ Array(
 )
 
 // Output without headers:
-$csv->parse( false );
+$csv->parse(false);
 
 Array(
   [0] => array(
     [0] => 'id',
     [1] => 'first_name',
     [2] => 'last_name'
-  ),
+ ),
   [1] => array(
     [0] => 1,
     [1] => 'Jabran',
     [2] => 'Rafique'
-  )
+ )
 )
 ```
 
 # License
-&copy; 2015 MIT License - [Jabran Rafique](http://jabran.me)
+&copy; 2015&mdash;2017 MIT License - [Jabran Rafique](http://jabran.me)
 
 [![Analytics](https://ga-beacon.appspot.com/UA-50688851-1/csv-parser)](https://github.com/igrigorik/ga-beacon)
