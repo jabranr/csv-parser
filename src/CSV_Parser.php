@@ -24,6 +24,8 @@ use Jabran\Exception\UnreadableResourceException;
  */
 class CSV_Parser {
 
+	const DEFAULT_ENCODING = 'UTF-8';
+
 	/* @var string $data */
 	protected $data;
 
@@ -46,7 +48,7 @@ class CSV_Parser {
 	 */
 	public function __construct() {
 		$this->setData(null);
-		$this->setEncoding('UTF-8');
+		$this->setEncoding(static::DEFAULT_ENCODING);
 		$this->setHeaders(null);
 		$this->setRows(null);
 		$this->setColumns(null);
@@ -66,7 +68,7 @@ class CSV_Parser {
 			throw new InvalidArgumentException('Required arguments are missing.');
 		}
 
-		if (null !== $data && ! is_string($data)) {
+		if (null !== $data && !is_string($data)) {
 			throw new InvalidDataException('Unexpected data.');
 		}
 
@@ -96,7 +98,7 @@ class CSV_Parser {
 			throw new InvalidArgumentException('Required arguments are missing.');
 	    }
 
-	    if (null !== $encoding && ! is_string($encoding)) {
+	    if (null !== $encoding && !is_string($encoding)) {
 			throw new InvalidEncodingException('Unexpected encoding.');
 	    }
 
@@ -130,7 +132,7 @@ class CSV_Parser {
 			throw new InvalidArgumentException('Required arguments are missing.');
 		}
 
-		if (null !== $headers && ! is_array($headers)) {
+		if (null !== $headers && !is_array($headers)) {
 			throw new InvalidDataException('Unexpected headers data.');
 		}
 
@@ -160,7 +162,7 @@ class CSV_Parser {
 			throw new InvalidArgumentException('Required arguments are missing.');
 		}
 
-		if (null !== $columns && ! is_array($columns)) {
+		if (null !== $columns && !is_array($columns)) {
 			throw new InvalidDataException('Unexpected columns data.');
 		}
 
@@ -190,7 +192,7 @@ class CSV_Parser {
 			throw new InvalidArgumentException('Required arguments are missing.');
 		}
 
-		if (null !== $rows && ! is_array($rows)) {
+		if (null !== $rows && !is_array($rows)) {
 			throw new InvalidDataException('Unexpected rows data.');
 		}
 
@@ -230,11 +232,11 @@ class CSV_Parser {
 	 * @since 2.0.2
 	 */
 	public function fromPath($path = null) {
-		if (null === $path || ! is_string($path)) {
+		if (null === $path || !is_string($path)) {
 			throw new InvalidPathException('Invalid resource path.');
 		}
 
-		if (! file_exists($path) || ! is_readable($path)) {
+		if (!file_exists($path) || !is_readable($path)) {
 			throw new InvalidAccessException('Unable to retrieve the resource.');
 		}
 
@@ -263,7 +265,7 @@ class CSV_Parser {
 	 * @return self
 	 */
 	public function fromString($string = null) {
-		if (null === $string || ! is_string($string)) {
+		if (null === $string || !is_string($string)) {
 			throw new InvalidDataTypeException('Invalid or unexpected data.');
 		}
 
@@ -296,7 +298,7 @@ class CSV_Parser {
 	 * @since 2.0.2
 	 */
 	public function fromResource($resource = null) {
-		if (null === $resource || ! is_resource($resource)) {
+		if (null === $resource || !is_resource($resource)) {
 			throw new InvalidResourceException('Invalid or unexpected resource.');
 		}
 
@@ -332,22 +334,19 @@ class CSV_Parser {
 
 	/**
 	 * Convert character encoding of data
+	 *
 	 * @throws Jabran\Exception\InvalidEncodingException
 	 * @return self
 	 */
 	public function encode() {
 	    $data = $this->getData();
-	    $this->setData(mb_convert_encoding(
-		$data, 
-		$this->getEncoding(), 
-		mb_detect_encoding($data)
-	    ));
+	    $encodedData = mb_convert_encoding($data, $this->getEncoding(), mb_detect_encoding($this->getData()));
+	    $this->setData($encodedData);
 
 	    if ($this->getEncoding() !== mb_detect_encoding($this->getData())) {
-		throw new InvalidEncodingException(
-		    'Unable to convert character encoding from '. mb_detect_encoding($this->getData()).
-		    ' to '.$this->getEncoding().'.'
-		);
+	    	throw new InvalidEncodingException(
+	    		sprintf('Unable to convert character encoding from "%s" to "%s".', mb_detect_encoding($this->getData()), $this->getEncoding())
+	    	);
 	    }
 
 	    return $this;
@@ -413,7 +412,7 @@ class CSV_Parser {
 		$columns = $this->getColumns();
 		$rows = array();
 
-		if (! is_array($columns) || count($columns) < 1) {
+		if (!is_array($columns) || count($columns) < 1) {
 			$this->setRows($rows);
 			return $this;
 		}
