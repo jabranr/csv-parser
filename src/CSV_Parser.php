@@ -46,7 +46,7 @@ class CSV_Parser {
 	 */
 	public function __construct() {
 		$this->setData(null);
-		$this->setEncoding(null);
+		$this->setEncoding('UTF-8');
 		$this->setHeaders(null);
 		$this->setRows(null);
 		$this->setColumns(null);

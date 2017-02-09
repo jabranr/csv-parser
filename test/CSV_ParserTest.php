@@ -902,7 +902,6 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testConvertEncoding_ASCIIToUTF8() {
 		$this->csv->fromString($this->sampleInput);
-		$this->csv->setEncoding('UTF-8');
 		$this->csv->convertEncoding();
 		return $this->assertEquals(
 		    $this->csv->getEncoding(), 
