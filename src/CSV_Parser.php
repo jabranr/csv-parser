@@ -18,7 +18,7 @@ use Jabran\Exception\UnreadableResourceException;
  * Parse CSV data from a file, path, stream, resource or string
  *
  * @author: Jabran Rafique <hello@jabran.me>
- * @version: 2.0.4
+ * @version: 2.1.0
  * @license: MIT License
  * @link: https://github.com/jabranr/csv-parser
  */
