@@ -335,7 +335,7 @@ class CSV_Parser {
 	 * @throws Jabran\Exception\InvalidEncodingException
 	 * @return self
 	 */
-	public function convertEncoding() {
+	public function encode() {
 	    $data = $this->getData();
 	    $this->setData(mb_convert_encoding(
 		$data, 

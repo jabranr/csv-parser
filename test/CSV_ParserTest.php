@@ -892,17 +892,17 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::convertEncoding tests
+	 * Jabran\CSV_Parser::encode tests
 	 * ---------------------------------------------------------------
 	 */
 
 	/**
-	 * Test convertEncoding method
+	 * Test encode method
 	 * @expectedException Jabran\Exception\InvalidEncodingException
 	 */
 	public function testConvertEncoding_ASCIIToUTF8() {
 		$this->csv->fromString($this->sampleInput);
-		$this->csv->convertEncoding();
+		$this->csv->encode();
 		return $this->assertEquals(
 		    $this->csv->getEncoding(), 
 		    mb_detect_encoding($this->csv->getData())
@@ -910,12 +910,12 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Test convertEncoding method
+	 * Test encode method
 	 */
 	public function testConvertEncoding_UTF8ToASCII() {
 		$this->csv->fromString($this->sampleInputUTF8);
 		$this->csv->setEncoding('ASCII');
-		$this->csv->convertEncoding();
+		$this->csv->encode();
 		return $this->assertEquals(
 		    $this->csv->getEncoding(), 
 		    mb_detect_encoding($this->csv->getData())
@@ -923,13 +923,13 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Test convertEncoding method
+	 * Test encode method
 	 * @expectedException Jabran\Exception\InvalidEncodingException
 	 */
 	public function testConvertEncoding_UTF8ToUTF16() {
 		$this->csv->fromString($this->sampleInputUTF8);
 		$this->csv->setEncoding('UTF-16');
-		$this->csv->convertEncoding();
+		$this->csv->encode();
 		return $this->assertEquals(
 		    $this->csv->getEncoding(), 
 		    mb_detect_encoding($this->csv->getData())
