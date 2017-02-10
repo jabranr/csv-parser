@@ -176,7 +176,7 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 	public function testSetEncoding_ArgumentAsBoolean() {
 	    return $this->csv->setEncoding(true);
 	}
-	
+
 	/**
 	 * Test setEncoding method
 	 * @expectedException Jabran\Exception\InvalidEncodingException
@@ -738,6 +738,47 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 		return $this->assertEquals('string', gettype($this->csv->getData()));
 	}
 
+	/**
+	 * ---------------------------------------------------------------
+	 * Jabran\CSV_Parser::trimRecursively tests
+	 * ---------------------------------------------------------------
+	 */
+
+	/**
+	 * Test trim recursively for an integer
+	 * @depends testFromString_DataType
+	 */
+	public function testTrimRecursivelyInteger() {
+		$trimmed = $this->csv->trimRecursively(1);
+		return $this->assertEquals(1, $trimmed);
+	}
+
+	/**
+	 * Test trim recursively for a string
+	 * @depends testFromString_DataType
+	 */
+	public function testTrimRecursivelyString() {
+		$trimmed = $this->csv->trimRecursively(' foo');
+		return $this->assertEquals('foo', $trimmed);
+	}
+
+	/**
+	 * Test trim recursively for an array
+	 * @depends testFromString_DataType
+	 */
+	public function testTrimRecursivelyArray() {
+		$trimmed = $this->csv->trimRecursively(array(' foo', ' bar', ' baz'));
+		return $this->assertEquals(array('foo', 'bar', 'baz'), $trimmed);
+	}
+
+	/**
+	 * Test trim recursively for associative array
+	 * @depends testFromString_DataType
+	 */
+	public function testTrimRecursivelyAssociativeArray() {
+		$trimmed = $this->csv->trimRecursively(array('foo' => ' bar', ' baz' => ' meow'));
+		return $this->assertEquals(array('foo' => 'bar', ' baz' => 'meow'), $trimmed);
+	}
 
 	/**
 	 * ---------------------------------------------------------------
@@ -904,7 +945,7 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 		$this->csv->fromString($this->sampleInput);
 		$this->csv->encode();
 		return $this->assertEquals(
-		    $this->csv->getEncoding(), 
+		    $this->csv->getEncoding(),
 		    mb_detect_encoding($this->csv->getData())
 		);
 	}
@@ -917,7 +958,7 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 		$this->csv->setEncoding('ASCII');
 		$this->csv->encode();
 		return $this->assertEquals(
-		    $this->csv->getEncoding(), 
+		    $this->csv->getEncoding(),
 		    mb_detect_encoding($this->csv->getData())
 		);
 	}
@@ -931,7 +972,7 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 		$this->csv->setEncoding('UTF-16');
 		$this->csv->encode();
 		return $this->assertEquals(
-		    $this->csv->getEncoding(), 
+		    $this->csv->getEncoding(),
 		    mb_detect_encoding($this->csv->getData())
 		);
 	}
