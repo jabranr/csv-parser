@@ -1,7 +1,7 @@
 {
     "name": "jabranr/csv-parser",
     "type": "library",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "description": "Parse CSV data from a file, stream or string",
     "keywords": ["csv", "php", "parser"],
     "homepage": "https://github.com/jabranr/csv-parser",
