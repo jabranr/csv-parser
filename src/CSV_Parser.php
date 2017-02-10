@@ -136,6 +136,7 @@ class CSV_Parser {
 			throw new InvalidDataException('Unexpected headers data.');
 		}
 
+		$headers = $this->trimRecursively($headers);
 		$this->headers = $headers;
 		return $this;
 	}
@@ -166,8 +167,27 @@ class CSV_Parser {
 			throw new InvalidDataException('Unexpected columns data.');
 		}
 
+		$columns = $this->trimRecursively($columns);
 		$this->columns = $columns;
 		return $this;
+	}
+
+	/**
+	 * Trim data recursively
+	 *
+	 * @param mixed $data
+	 * @return mixed
+	 */
+	public function trimRecursively($data) {
+		if (!is_string($data) && !is_array($data)) {
+			return $data;
+		}
+
+		if (is_string($data)) {
+			return trim($data);
+		}
+
+		return array_map(array($this, 'trimRecursively'), $data);
 	}
 
 	/**
@@ -196,6 +216,7 @@ class CSV_Parser {
 			throw new InvalidDataException('Unexpected rows data.');
 		}
 
+		$rows = $this->trimRecursively($rows);
 		$this->rows = $rows;
 		return $this;
 	}
@@ -394,7 +415,7 @@ class CSV_Parser {
 			// Ignore rows that do not have same length
 			if ( count($this->getHeaders()) !== count($row) ) {
 				continue;
-            }
+			}
 
 			$rowsWithHeader[] = array_combine($this->getHeaders(), $row);
 		}
