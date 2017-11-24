@@ -336,6 +336,7 @@ class CSV_Parser {
 	 * Parse data
 	 *
 	 * @param boolean $headers
+     * @throws Jabran\Exception\InvalidEncodingException
 	 * @return array
 	 */
 	public function parse($headers = true) {
@@ -350,6 +351,7 @@ class CSV_Parser {
 			$this->_makeRowsWithHeaders();
 		}
 
+		$this->encode();
 		return $this->getRows();
 	}
 
@@ -359,7 +361,7 @@ class CSV_Parser {
 	 * @throws Jabran\Exception\InvalidEncodingException
 	 * @return self
 	 */
-	public function encode() {
+	private function encode() {
 	    $data = $this->getData();
 	    $encodedData = mb_convert_encoding($data, $this->getEncoding(), mb_detect_encoding($this->getData()));
 	    $this->setData($encodedData);
