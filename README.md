@@ -19,7 +19,7 @@ Install using [composer](http://getcomposer.org)
 
 Run following to install
 ```shell
-$ comsposer install
+$ composer install
 ```
 
 # Use
