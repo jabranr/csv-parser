@@ -4,7 +4,7 @@ PHP client to parse CSV data from a path, file, stream, resource or string into 
 
 #### Migration from v2 to v3
 
-PHP support updated to 5.6+
+PHP support updated to 7+
 
 # Install
 Install using [composer](http://getcomposer.org)
