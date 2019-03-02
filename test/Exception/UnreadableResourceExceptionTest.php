@@ -1,11 +1,12 @@
 <?php namespace Jabran\Tests\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Jabran\Exception\UnreadableResourceException;
 
 /**
  * UnreadableResourceException
  */
-class UnreadableResourceExceptionTest extends \PHPUnit_Framework_TestCase {
+class UnreadableResourceExceptionTest extends TestCase {
 
 	/**
 	 * @expectedException Jabran\Exception\UnreadableResourceException

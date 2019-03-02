@@ -2,7 +2,9 @@
 
 PHP client to parse CSV data from a path, file, stream, resource or string into indexed or associative arrays.
 
-> Namespaces were added in v2.0.2 so make sure you update your code before migrating from an older version.
+#### Migration from v2 to v3
+
+PHP support updated to 5.6+
 
 # Install
 Install using [composer](http://getcomposer.org)
@@ -12,7 +14,7 @@ Install using [composer](http://getcomposer.org)
 
 {
   "require": {
-    "jabranr/csv-parser": "~2.1.*"
+    "jabranr/csv-parser": "^3.0"
   }
 }
 ```
@@ -26,6 +28,23 @@ $ comsposer install
 Initiate a new instance
 ```php
 $csv = new Jabran\CSV_Parser();
+```
+
+# Unit tests
+
+If you have `composer` installed globally then:
+
+Run unit tests
+```shell
+$ cd path/to/csv-parser
+$ composer run tests
+```
+
+If you have `phpunit` installed globally then:
+
+```shell
+$ cd path/to/csv-parser
+$ phpunit
 ```
 
 # API
@@ -154,6 +173,8 @@ Array(
 ```
 
 # License
-&copy; 2015&mdash;2017 MIT License - [Jabran Rafique](http://jabran.me)
+&copy; 2015 onwards
+
+MIT License - [Jabran Rafique](http://jabran.me)
 
 [![Analytics](https://ga-beacon.appspot.com/UA-50688851-1/csv-parser)](https://github.com/igrigorik/ga-beacon)

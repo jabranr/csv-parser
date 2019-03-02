@@ -1,11 +1,12 @@
 <?php namespace Jabran\Tests\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Jabran\Exception\InvalidArgumentException;
 
 /**
  * InvalidArgumentException
  */
-class InvalidArgumentExceptionTest extends \PHPUnit_Framework_TestCase {
+class InvalidArgumentExceptionTest extends TestCase {
 
 	/**
 	 * @expectedException Jabran\Exception\InvalidArgumentException

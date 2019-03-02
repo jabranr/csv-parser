@@ -1,11 +1,12 @@
 <?php namespace Jabran\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Jabran\CSV_Parser;
 
 /**
  * Unit test for CSV_Parser
  */
-class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
+class CSV_ParserTest extends TestCase {
 
 	/* @var Jabran\CSV_Parser */
 	public $csv;
@@ -142,7 +143,8 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 	 * Test setEncoding method
 	 */
 	public function testSetEncoding_NoArguments() {
-	    return $this->csv->setEncoding(null);
+        $this->csv->setEncoding(null);
+        return $this->assertNull($this->csv->getEncoding());
 	}
 
 	/**
@@ -189,7 +191,8 @@ class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
 	 * Test setEncoding method
 	 */
 	public function testSetEncoding_ArgumentAsSupportedEncoding() {
-	    return $this->csv->setEncoding('UTF-8');
+        $this->csv->setEncoding('UTF-8');
+        $this->assertEquals('UTF-8', $this->csv->getEncoding());
 	}
 
 	/**
