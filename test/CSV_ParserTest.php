@@ -1,11 +1,12 @@
 <?php namespace Jabran\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Jabran\CSV_Parser;
 
 /**
  * Unit test for CSV_Parser
  */
-class CSV_ParserTest extends \PHPUnit_Framework_TestCase {
+class CSV_ParserTest extends TestCase {
 
 	/* @var Jabran\CSV_Parser */
 	public $csv;
