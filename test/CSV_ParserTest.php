@@ -26,7 +26,7 @@ class CSV_ParserTest extends TestCase {
 	/**
 	 * Default setUp method
 	 */
-	public function setUp() : void {
+	public function setUp() {
 		$this->csv = new CSV_Parser();
 		$this->sampleInput = 'name,homepage;CSV_Parser,https://github.com/jabranr/csv-parser';
 		$this->sampleInputUTF8 = 'Zażółć gęślą jaźń,Zażółć gęślą jaźń';
@@ -43,7 +43,7 @@ class CSV_ParserTest extends TestCase {
 	/**
 	 * Default tearDown method
 	 */
-	public function tearDown() : void {
+	public function tearDown() {
 		unset($this->csv);
 		unset($this->sampleInput);
 		unset($this->sampleDataFile);
