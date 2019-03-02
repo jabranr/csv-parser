@@ -55,22 +55,10 @@ Get data from a string
 $csv->fromString($str);
 ```
 
-Get data from a stream (Will be deprecated in future)
-```php
-/* @param: resource $stream (f.e. php://input) */
-$csv->fromStream($stream);
-```
-
 Get data from a resource (Since v2.0.2)
 ```php
 /* @param: resource $resource (f.e. resource created using fopen()) */
 $csv->fromResource($resource);
-```
-
-Get data from a file path (Will be deprecated in future)
-```php
-/* @param: string $file */
-$csv->fromFile($file);
 ```
 
 Get data from a path/URL (Since v2.0.2)

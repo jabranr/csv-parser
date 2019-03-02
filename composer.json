@@ -21,7 +21,8 @@
     "tests": "phpunit"
   },
   "require": {
-    "php": ">=7.0"
+    "php": ">=7.0",
+    "ext-mbstring": "*"
   },
   "require-dev": {
     "phpunit/phpunit": ">6"
