@@ -2,7 +2,9 @@
 
 PHP client to parse CSV data from a path, file, stream, resource or string into indexed or associative arrays.
 
-> Namespaces were added in v2.0.2 so make sure you update your code before migrating from an older version.
+#### Migration from v2 to v3
+
+* PHP support updated to 5.5+ in v3
 
 # Install
 Install using [composer](http://getcomposer.org)
