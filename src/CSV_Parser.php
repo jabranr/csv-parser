@@ -50,7 +50,6 @@ class CSV_Parser {
      */
 	public function __construct() {
 		$this->setEncoding(static::DEFAULT_ENCODING);
-        return $this;
 	}
 
     /**
