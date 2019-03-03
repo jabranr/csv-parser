@@ -1,4 +1,15 @@
-<?php
+<?php declare(strict_types=1);
+
+/**
+ * CSV_Parser class
+ *
+ * Parse CSV data from a file, path, stream, resource or string
+ *
+ * @author: Jabran Rafique <hello@jabran.me>
+ * @version: 3.0.0
+ * @license: MIT License
+ * @link: https://github.com/jabranr/csv-parser
+ */
 
 namespace Jabran;
 
@@ -12,16 +23,6 @@ use Jabran\Exception\InvalidDataTypeException;
 use Jabran\Exception\InvalidResourceException;
 use Jabran\Exception\UnreadableResourceException;
 
-/**
- * CSV_Parser class
- *
- * Parse CSV data from a file, path, stream, resource or string
- *
- * @author: Jabran Rafique <hello@jabran.me>
- * @version: 3.0.0
- * @license: MIT License
- * @link: https://github.com/jabranr/csv-parser
- */
 class CSV_Parser {
 
 	const DEFAULT_ENCODING = 'UTF-8';

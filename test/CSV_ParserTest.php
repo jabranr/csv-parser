@@ -1,4 +1,6 @@
-<?php namespace Jabran\Tests;
+<?php declare(strict_types=1);
+
+namespace Jabran\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Jabran\CSV_Parser;
@@ -26,7 +28,7 @@ class CSV_ParserTest extends TestCase {
 	/**
 	 * Default setUp method
 	 */
-	protected function setUp() {
+	protected function setUp(): void {
 		$this->csv = new CSV_Parser();
 		$this->sampleInput = 'name,homepage;CSV_Parser,https://github.com/jabranr/csv-parser';
 		$this->sampleInputUTF8 = 'Zażółć gęślą jaźń,Zażółć gęślą jaźń';
@@ -43,7 +45,7 @@ class CSV_ParserTest extends TestCase {
 	/**
 	 * Default tearDown method
 	 */
-	protected function tearDown() {
+	protected function tearDown(): void {
 		unset($this->csv);
 		unset($this->sampleInput);
 		unset($this->sampleDataFile);
