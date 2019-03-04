@@ -2,6 +2,13 @@
 
 namespace Jabran\Tests;
 
+use Jabran\Exception\EmptyResourceException;
+use Jabran\Exception\InvalidAccessException;
+use Jabran\Exception\InvalidDataException;
+use Jabran\Exception\InvalidDataTypeException;
+use Jabran\Exception\InvalidEncodingException;
+use Jabran\Exception\InvalidPathException;
+use Jabran\Exception\InvalidResourceException;
 use PHPUnit\Framework\TestCase;
 use Jabran\CSV_Parser;
 
@@ -10,7 +17,7 @@ use Jabran\CSV_Parser;
  */
 class CSV_ParserTest extends TestCase {
 
-	/* @var Jabran\CSV_Parser */
+	/* @var CSV_Parser */
 	public $csv;
 
 	/* @var string Sample data input */
@@ -62,7 +69,7 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser attribute existence tests
+	 * CSV_Parser attribute existence tests
 	 * ---------------------------------------------------------------
 	 */
 
@@ -103,7 +110,7 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser default attribute value tests
+	 * CSV_Parser default attribute value tests
 	 * ---------------------------------------------------------------
 	 */
 
@@ -137,56 +144,49 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::setEncoding tests
+	 * CSV_Parser::setEncoding tests
 	 * ---------------------------------------------------------------
 	 */
 
-	/**
-	 * Test setEncoding method
-     * @expectedException Jabran\Exception\InvalidEncodingException
-	 */
-	public function testSetEncoding_NoArguments() {
-        $this->csv->setEncoding(null);
-	}
 
 	/**
 	 * Test setEncoding method
-	 * @expectedException Jabran\Exception\InvalidEncodingException
 	 */
 	public function testSetEncoding_ArgumentAsArray() {
-		return $this->csv->setEncoding(array());
+        $this->expectException(InvalidEncodingException::class);
+        $this->csv->setEncoding(array());
 	}
 
 	/**
 	 * Test setEncoding method
-	 * @expectedException Jabran\Exception\InvalidEncodingException
 	 */
 	public function testSetEncoding_ArgumentAsNumber() {
-		return $this->csv->setEncoding(10);
+        $this->expectException(InvalidEncodingException::class);
+        $this->csv->setEncoding(10);
 	}
 
 	/**
 	 * Test setEncoding method
-	 * @expectedException Jabran\Exception\InvalidEncodingException
 	 */
 	public function testSetEncoding_ArgumentAsFloat() {
-	    return $this->csv->setEncoding(1.2);
+        $this->expectException(InvalidEncodingException::class);
+        $this->csv->setEncoding(1.2);
 	}
 
 	/**
 	 * Test setEncoding method
-	 * @expectedException Jabran\Exception\InvalidEncodingException
 	 */
 	public function testSetEncoding_ArgumentAsBoolean() {
-	    return $this->csv->setEncoding(true);
+        $this->expectException(InvalidEncodingException::class);
+        $this->csv->setEncoding(true);
 	}
 
 	/**
 	 * Test setEncoding method
-	 * @expectedException Jabran\Exception\InvalidEncodingException
 	 */
 	public function testSetEncoding_ArgumentAsUnsupportedEncoding() {
-	    return $this->csv->setEncoding('FOO-9');
+        $this->expectException(InvalidEncodingException::class);
+        $this->csv->setEncoding('FOO-9');
 	}
 
 	/**
@@ -199,40 +199,40 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::setData tests
+	 * CSV_Parser::setData tests
 	 * ---------------------------------------------------------------
 	 */
 
 	/**
 	 * Test setData method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetData_ArgumentAsArray() {
-		return $this->csv->setData(array());
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setData(array());
 	}
 
 	/**
 	 * Test setData method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetData_ArgumentAsNumber() {
-		return $this->csv->setData(10);
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setData(10);
 	}
 
 	/**
 	 * Test setData method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetData_ArgumentAsFloat() {
-		return $this->csv->setData(2.5);
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setData(2.5);
 	}
 
 	/**
 	 * Test setData method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetData_ArgumentAsBoolean() {
-		return $this->csv->setData(true);
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setData(true);
 	}
 
 	/**
@@ -245,7 +245,7 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::getData tests
+	 * CSV_Parser::getData tests
 	 * ---------------------------------------------------------------
 	 */
 
@@ -266,41 +266,41 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::setHeaders tests
+	 * CSV_Parser::setHeaders tests
 	 * ---------------------------------------------------------------
 	 */
 
 
 	/**
 	 * Test setHeaders method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetHeaders_ArgumentAsString() {
-		return $this->csv->setHeaders('');
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setHeaders('');
 	}
 
 	/**
 	 * Test setHeaders method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetHeaders_ArgumentAsNumber() {
-		return $this->csv->setHeaders(10);
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setHeaders(10);
 	}
 
 	/**
 	 * Test setHeaders method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetHeaders_ArgumentAsFloat() {
-		return $this->csv->setHeaders(2.5);
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setHeaders(2.5);
 	}
 
 	/**
 	 * Test setHeaders method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetHeaders_ArgumentAsBoolean() {
-		return $this->csv->setHeaders(true);
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setHeaders(true);
 	}
 
 	/**
@@ -313,7 +313,7 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::getHeaders tests
+	 * CSV_Parser::getHeaders tests
 	 * ---------------------------------------------------------------
 	 */
 
@@ -334,40 +334,40 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::setColumns tests
+	 * CSV_Parser::setColumns tests
 	 * ---------------------------------------------------------------
 	 */
 
 	/**
 	 * Test setColumns method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetColumns_ArgumentAsArray() {
-		return $this->csv->setColumns('');
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setColumns('');
 	}
 
 	/**
 	 * Test setColumns method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetColumns_ArgumentAsNumber() {
-		return $this->csv->setColumns(10);
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setColumns(10);
 	}
 
 	/**
 	 * Test setColumns method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetColumns_ArgumentAsFloat() {
-		return $this->csv->setColumns(2.5);
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setColumns(2.5);
 	}
 
 	/**
 	 * Test setColumns method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetColumns_ArgumentAsBoolean() {
-		return $this->csv->setColumns(true);
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setColumns(true);
 	}
 
 	/**
@@ -381,7 +381,7 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::getColumns tests
+	 * CSV_Parser::getColumns tests
 	 * ---------------------------------------------------------------
 	 */
 
@@ -403,40 +403,40 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::setRows tests
+	 * CSV_Parser::setRows tests
 	 * ---------------------------------------------------------------
 	 */
 
 	/**
 	 * Test setRows method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetRows_ArgumentAsArray() {
-		return $this->csv->setRows('');
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setRows('');
 	}
 
 	/**
 	 * Test setRows method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetRows_ArgumentAsNumber() {
-		return $this->csv->setRows(10);
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setRows(10);
 	}
 
 	/**
 	 * Test setRows method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetRows_ArgumentAsFloat() {
-		return $this->csv->setRows(2.5);
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setRows(2.5);
 	}
 
 	/**
 	 * Test setRows method
-	 * @expectedException Jabran\Exception\InvalidDataException
 	 */
 	public function testSetRows_ArgumentAsBoolean() {
-		return $this->csv->setRows(true);
+        $this->expectException(InvalidDataException::class);
+        $this->csv->setRows(true);
 	}
 
 	/**
@@ -450,7 +450,7 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::getRows tests
+	 * CSV_Parser::getRows tests
 	 * ---------------------------------------------------------------
 	 */
 
@@ -473,57 +473,57 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::fromPath tests
+	 * CSV_Parser::fromPath tests
 	 * ---------------------------------------------------------------
 	 */
 
 
 	/**
 	 * Test fromPath method
-	 * @expectedException Jabran\Exception\InvalidPathException
 	 */
 	public function testFromPath_WithArray() {
-		return $this->csv->fromPath(array());
+        $this->expectException(InvalidPathException::class);
+        $this->csv->fromPath(array());
 	}
 
 	/**
 	 * Test fromPath method
-	 * @expectedException Jabran\Exception\InvalidPathException
 	 */
 	public function testFromPath_WithNumber() {
-		return $this->csv->fromPath(10);
+        $this->expectException(InvalidPathException::class);
+        $this->csv->fromPath(10);
 	}
 
 	/**
 	 * Test fromPath method
-	 * @expectedException Jabran\Exception\InvalidPathException
 	 */
 	public function testFromPath_WithFloat() {
-		return $this->csv->fromPath(2.5);
+        $this->expectException(InvalidPathException::class);
+        $this->csv->fromPath(2.5);
 	}
 
 	/**
 	 * Test fromPath method
-	 * @expectedException Jabran\Exception\InvalidPathException
 	 */
 	public function testFromPath_WithBoolean() {
-		return $this->csv->fromPath(true);
+        $this->expectException(InvalidPathException::class);
+        $this->csv->fromPath(true);
 	}
 
 	/**
 	 * Test fromPath method
-	 * @expectedException Jabran\Exception\InvalidAccessException
 	 */
 	public function testFromPath_InaccessiblePath() {
-		return $this->csv->fromPath('/path/to/foo.txt');
+        $this->expectException(InvalidAccessException::class);
+        $this->csv->fromPath('/path/to/foo.txt');
 	}
 
 	/**
 	 * Test fromPath method
-	 * @expectedException Jabran\Exception\EmptyResourceException
 	 */
 	public function testFromPath_EmptyResource() {
-		return $this->csv->fromPath($this->sampleEmptyFile);
+        $this->expectException(EmptyResourceException::class);
+        $this->csv->fromPath($this->sampleEmptyFile);
 	}
 
 	/**
@@ -545,48 +545,48 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::fromString tests
+	 * CSV_Parser::fromString tests
 	 * ---------------------------------------------------------------
 	 */
 
 	/**
 	 * Test fromString method
-	 * @expectedException Jabran\Exception\InvalidDataTypeException
 	 */
 	public function testFromString_WithArray() {
-		return $this->csv->fromString(array());
+        $this->expectException(InvalidDataTypeException::class);
+        $this->csv->fromString(array());
 	}
 
 	/**
 	 * Test fromString method
-	 * @expectedException Jabran\Exception\InvalidDataTypeException
 	 */
 	public function testFromString_WithNumber() {
-		return $this->csv->fromString(10);
+        $this->expectException(InvalidDataTypeException::class);
+        $this->csv->fromString(10);
 	}
 
 	/**
 	 * Test fromString method
-	 * @expectedException Jabran\Exception\InvalidDataTypeException
 	 */
 	public function testFromString_WithFloat() {
-		return $this->csv->fromString(2.5);
+        $this->expectException(InvalidDataTypeException::class);
+        $this->csv->fromString(2.5);
 	}
 
 	/**
 	 * Test fromString method
-	 * @expectedException Jabran\Exception\InvalidDataTypeException
 	 */
 	public function testFromString_WithBoolean() {
-		return $this->csv->fromString(true);
+        $this->expectException(InvalidDataTypeException::class);
+        $this->csv->fromString(true);
 	}
 
 	/**
 	 * Test fromString method
-	 * @expectedException Jabran\Exception\EmptyResourceException
 	 */
 	public function testFromString_EmptyString() {
-		return $this->csv->fromString('');
+        $this->expectException(EmptyResourceException::class);
+        $this->csv->fromString('');
 	}
 
 	/**
@@ -608,7 +608,7 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::trimRecursively tests
+	 * CSV_Parser::trimRecursively tests
 	 * ---------------------------------------------------------------
 	 */
 
@@ -652,48 +652,48 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::fromResource tests
+	 * CSV_Parser::fromResource tests
 	 * ---------------------------------------------------------------
 	 */
 
 	/**
 	 * Test fromResource method
-	 * @expectedException Jabran\Exception\InvalidResourceException
 	 */
 	public function testFromResource_WithArray() {
-		return $this->csv->fromResource(array());
+        $this->expectException(InvalidResourceException::class);
+        $this->csv->fromResource(array());
 	}
 
 	/**
 	 * Test fromResource method
-	 * @expectedException Jabran\Exception\InvalidResourceException
 	 */
 	public function testFromResource_WithNumber() {
-		return $this->csv->fromResource(10);
+        $this->expectException(InvalidResourceException::class);
+        $this->csv->fromResource(10);
 	}
 
 	/**
 	 * Test fromResource method
-	 * @expectedException Jabran\Exception\InvalidResourceException
 	 */
 	public function testFromResource_WithFloat() {
-		return $this->csv->fromResource(2.5);
+        $this->expectException(InvalidResourceException::class);
+        $this->csv->fromResource(2.5);
 	}
 
 	/**
 	 * Test fromResource method
-	 * @expectedException Jabran\Exception\InvalidResourceException
 	 */
 	public function testFromResource_WithBoolean() {
-		return $this->csv->fromResource(true);
+        $this->expectException(InvalidResourceException::class);
+        $this->csv->fromResource(true);
 	}
 
 	/**
 	 * Test fromResource method
-	 * @expectedException Jabran\Exception\InvalidResourceException
 	 */
 	public function testFromResource_WithString() {
-		return $this->csv->fromResource('');
+        $this->expectException(InvalidResourceException::class);
+        $this->csv->fromResource('');
 	}
 
 	/**
@@ -716,22 +716,22 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::encode tests
+	 * CSV_Parser::encode tests
 	 * ---------------------------------------------------------------
 	 */
 
 	/**
 	 * Test encode method
-	 * @expectedException Jabran\Exception\InvalidEncodingException
 	 */
 	public function testConvertEncoding_ASCIIToUTF8() {
-		$this->csv->fromString($this->sampleInput);
-		$this->csv->encode();
-		$this->assertEquals(
+        $this->expectException(InvalidEncodingException::class);
+        $this->csv->fromString($this->sampleInput);
+        $this->csv->encode();
+        $this->assertEquals(
 		    $this->csv->getEncoding(),
 		    mb_detect_encoding($this->csv->getData())
 		);
-	}
+    }
 
 	/**
 	 * Test encode method
@@ -748,21 +748,21 @@ class CSV_ParserTest extends TestCase {
 
 	/**
 	 * Test encode method
-	 * @expectedException Jabran\Exception\InvalidEncodingException
 	 */
 	public function testConvertEncoding_UTF8ToUTF16() {
-		$this->csv->fromString($this->sampleInputUTF8);
-		$this->csv->setEncoding('UTF-16');
-		$this->csv->encode();
-		$this->assertEquals(
+        $this->expectException(InvalidEncodingException::class);
+        $this->csv->fromString($this->sampleInputUTF8);
+        $this->csv->setEncoding('UTF-16');
+        $this->csv->encode();
+        $this->assertEquals(
 		    $this->csv->getEncoding(),
 		    mb_detect_encoding($this->csv->getData())
 		);
-	}
+    }
 
 	/**
 	 * ---------------------------------------------------------------
-	 * Jabran\CSV_Parser::parse tests
+	 * CSV_Parser::parse tests
 	 * ---------------------------------------------------------------
 	 */
 

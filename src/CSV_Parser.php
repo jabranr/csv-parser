@@ -44,13 +44,9 @@ class CSV_Parser {
 
     /**
      * CSV_Parser constructor
-     *
-     * @throws InvalidArgumentException
-     * @throws InvalidDataException
-     * @throws InvalidEncodingException
      */
 	public function __construct() {
-		$this->setEncoding(static::DEFAULT_ENCODING);
+		$this->encoding = static::DEFAULT_ENCODING;
 	}
 
     /**
