@@ -18,11 +18,9 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * CSV_Parser attribute existence tests
+	 * attribute existence tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test existence of $encoding attribute
 	 */
 	public function testEncodingAttribute_Existence() {
@@ -59,11 +57,9 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 
 	/**
 	 * ---------------------------------------------------------------
-	 * CSV_Parser default attribute value tests
+	 * default attribute value tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test default value for $data attribute
 	 */
 	public function testDataAttribute_DefaultValue() {
@@ -95,10 +91,7 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::setEncoding tests
 	 * ---------------------------------------------------------------
-	 */
-
-
-	/**
+	 *
 	 * Test setEncoding method
 	 */
 	public function testSetEncoding_ArgumentAsArray() {
@@ -150,9 +143,7 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::setData tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test setData method
 	 */
 	public function testSetData_ArgumentAsArray() {
@@ -196,9 +187,7 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::getData tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test getData method
 	 */
 	public function testGetData_WithoutData() {
@@ -217,10 +206,7 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::setHeaders tests
 	 * ---------------------------------------------------------------
-	 */
-
-
-	/**
+	 *
 	 * Test setHeaders method
 	 */
 	public function testSetHeaders_ArgumentAsString() {
@@ -264,9 +250,7 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::getHeaders tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test getHeaders method
 	 */
 	public function testGetHeaders_WithoutData() {
@@ -285,9 +269,7 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::setColumns tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test setColumns method
 	 */
 	public function testSetColumns_ArgumentAsArray() {
@@ -332,9 +314,7 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::getColumns tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test getColumns method
 	 */
 	public function testGetColumns_WithoutData() {
@@ -354,9 +334,7 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::setRows tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test setRows method
 	 */
 	public function testSetRows_ArgumentAsArray() {
@@ -401,9 +379,7 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::getRows tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test getRows method
 	 */
 	public function testGetRows_WithoutData() {
@@ -419,15 +395,11 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 		$this->assertNotNull($this->csv->getRows());
 	}
 
-
 	/**
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::fromPath tests
 	 * ---------------------------------------------------------------
-	 */
-
-
-	/**
+	 *
 	 * Test fromPath method
 	 */
 	public function testFromPath_WithArray() {
@@ -496,9 +468,7 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::fromString tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test fromString method
 	 */
 	public function testFromString_WithArray() {
@@ -559,9 +529,7 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::trimRecursively tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test trim recursively for an integer
 	 * @depends testFromString_DataType
 	 */
@@ -597,15 +565,11 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 		$this->assertEquals(array('foo' => 'bar', ' baz' => 'meow'), $trimmed);
 	}
 
-
-
 	/**
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::fromResource tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test fromResource method
 	 */
 	public function testFromResource_WithArray() {
@@ -662,14 +626,11 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 		$this->assertEquals('string', gettype($this->csv->getData()));
 	}
 
-
 	/**
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::encode tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test encode method
 	 */
 	public function testConvertEncoding_ASCIIToUTF8() {
@@ -713,9 +674,7 @@ class CSV_ParserTest extends CSV_ParserTest_7_1 {
 	 * ---------------------------------------------------------------
 	 * CSV_Parser::parse tests
 	 * ---------------------------------------------------------------
-	 */
-
-	/**
+	 *
 	 * Test parse method without any data
 	 */
 	public function testParse_WithoutData() {
