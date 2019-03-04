@@ -7,11 +7,8 @@ use Jabran\Exception\UnreadableResourceException;
  * UnreadableResourceException
  */
 class UnreadableResourceExceptionTest extends TestCase {
-
-	/**
-	 * @expectedException Jabran\Exception\UnreadableResourceException
-	 */
-	public function testMatchException() {
+    public function testMatchException() {
+        $this->expectException(UnreadableResourceException::class);
 		throw new UnreadableResourceException('foo');
 	}
 }

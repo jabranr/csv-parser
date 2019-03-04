@@ -7,11 +7,8 @@ use Jabran\Exception\InvalidResourceException;
  * InvalidResourceException
  */
 class InvalidResourceExceptionTest extends TestCase {
-
-	/**
-	 * @expectedException Jabran\Exception\InvalidResourceException
-	 */
-	public function testMatchException() {
+    public function testMatchException() {
+        $this->expectException(InvalidResourceException::class);
 		throw new InvalidResourceException('foo');
 	}
 }

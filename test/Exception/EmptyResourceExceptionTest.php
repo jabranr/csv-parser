@@ -7,11 +7,8 @@ use Jabran\Exception\EmptyResourceException;
  * EmptyResourceException
  */
 class EmptyResourceExceptionTest extends TestCase {
-
-	/**
-	 * @expectedException Jabran\Exception\EmptyResourceException
-	 */
 	public function testMatchException() {
+        $this->expectException(EmptyResourceException::class);
 		throw new EmptyResourceException('foo');
 	}
 }

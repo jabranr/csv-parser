@@ -7,11 +7,8 @@ use Jabran\Exception\InvalidDataTypeException;
  * InvalidDataTypeException
  */
 class InvalidDataTypeExceptionTest extends TestCase {
-
-	/**
-	 * @expectedException Jabran\Exception\InvalidDataTypeException
-	 */
-	public function testMatchException() {
+    public function testMatchException() {
+        $this->expectException(InvalidDataTypeException::class);
 		throw new InvalidDataTypeException('foo');
 	}
 }

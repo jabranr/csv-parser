@@ -7,11 +7,8 @@ use Jabran\Exception\InvalidArgumentException;
  * InvalidArgumentException
  */
 class InvalidArgumentExceptionTest extends TestCase {
-
-	/**
-	 * @expectedException Jabran\Exception\InvalidArgumentException
-	 */
-	public function testMatchException() {
+    public function testMatchException() {
+        $this->expectException(InvalidArgumentException::class);
 		throw new InvalidArgumentException('foo');
 	}
 }

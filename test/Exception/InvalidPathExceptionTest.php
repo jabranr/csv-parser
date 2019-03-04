@@ -7,11 +7,8 @@ use Jabran\Exception\InvalidPathException;
  * InvalidPathException
  */
 class InvalidPathExceptionTest extends TestCase {
-
-	/**
-	 * @expectedException Jabran\Exception\InvalidPathException
-	 */
-	public function testMatchException() {
+    public function testMatchException() {
+        $this->expectException(InvalidPathException::class);
 		throw new InvalidPathException('foo');
 	}
 }
