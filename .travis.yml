@@ -4,7 +4,7 @@ sudo: false
 php:
   - 7.2
   - 7.1
-  - 7.03
+  - 7.0
 
 before_script:
   - composer self-update
