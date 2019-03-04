@@ -9,5 +9,7 @@ php:
 before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction
+  - PHP_VER=$(php -r "echo substr(PHP_VERSION, 2, 1);")
+  - [[ "$PHP_VER" == "0" ]] && sed -i -e 's/CSV_ParserTest_7_1/CSV_ParserTest_7_0/g' $(pwd)/test/CSV_ParserTest.php
 
 script: phpunit
