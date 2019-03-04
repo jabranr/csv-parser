@@ -4,12 +4,12 @@ sudo: false
 php:
   - 7.2
   - 7.1
-  - 7.0
+  - 7.03
 
 before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction
-  - chmod +x $(pwd)/prepare-tests.sh
-  - sh $(pwd)/prepare-tests.sh
+  - chmod +x prepare-tests.sh
+  - ./prepare-tests.sh
 
 script: composer run tests
