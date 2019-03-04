@@ -2,7 +2,9 @@
 
 PHP client to parse CSV data from a path, file, stream, resource or string into indexed or associative arrays.
 
-> Namespaces were added in v2.0.2 so make sure you update your code before migrating from an older version.
+#### Migration from v2 to v3
+
+PHP support updated to 7+
 
 # Install
 Install using [composer](http://getcomposer.org)
@@ -12,7 +14,7 @@ Install using [composer](http://getcomposer.org)
 
 {
   "require": {
-    "jabranr/csv-parser": "~2.1.*"
+    "jabranr/csv-parser": "^3.0"
   }
 }
 ```
@@ -28,6 +30,23 @@ Initiate a new instance
 $csv = new Jabran\CSV_Parser();
 ```
 
+# Unit tests
+
+If you have `composer` installed globally then:
+
+Run unit tests
+```shell
+$ cd path/to/csv-parser
+$ composer run tests
+```
+
+If you have `phpunit` installed globally then:
+
+```shell
+$ cd path/to/csv-parser
+$ phpunit
+```
+
 # API
 
 Get data from a string
@@ -36,22 +55,10 @@ Get data from a string
 $csv->fromString($str);
 ```
 
-Get data from a stream (Will be deprecated in future)
-```php
-/* @param: resource $stream (f.e. php://input) */
-$csv->fromStream($stream);
-```
-
 Get data from a resource (Since v2.0.2)
 ```php
 /* @param: resource $resource (f.e. resource created using fopen()) */
 $csv->fromResource($resource);
-```
-
-Get data from a file path (Will be deprecated in future)
-```php
-/* @param: string $file */
-$csv->fromFile($file);
 ```
 
 Get data from a path/URL (Since v2.0.2)
@@ -154,6 +161,8 @@ Array(
 ```
 
 # License
-&copy; 2015&mdash;2017 MIT License - [Jabran Rafique](http://jabran.me)
+&copy; 2015 onwards
+
+MIT License - [Jabran Rafique](http://jabran.me)
 
 [![Analytics](https://ga-beacon.appspot.com/UA-50688851-1/csv-parser)](https://github.com/igrigorik/ga-beacon)

@@ -1,16 +1,14 @@
 <?php namespace Jabran\Tests\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Jabran\Exception\InvalidAccessException;
 
 /**
  * InvalidAccessException
  */
-class InvalidAccessExceptionTest extends \PHPUnit_Framework_TestCase {
-
-	/**
-	 * @expectedException Jabran\Exception\InvalidAccessException
-	 */
-	public function testMatchException() {
+class InvalidAccessExceptionTest extends TestCase {
+    public function testMatchException() {
+        $this->expectException(InvalidAccessException::class);
 		throw new InvalidAccessException('foo');
 	}
 }

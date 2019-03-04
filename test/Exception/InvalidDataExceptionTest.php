@@ -1,16 +1,14 @@
 <?php namespace Jabran\Tests\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Jabran\Exception\InvalidDataException;
 
 /**
  * InvalidDataException
  */
-class InvalidDataExceptionTest extends \PHPUnit_Framework_TestCase {
-
-	/**
-	 * @expectedException Jabran\Exception\InvalidDataException
-	 */
-	public function testMatchException() {
-		throw new InvalidDataException('foo');
+class InvalidDataExceptionTest extends TestCase {
+    public function testMatchException() {
+        $this->expectException(InvalidDataException::class);
+        throw new InvalidDataException('foo');
 	}
 }

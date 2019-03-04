@@ -1,4 +1,15 @@
-<?php
+<?php declare(strict_types=1);
+
+/**
+ * CSV_Parser class
+ *
+ * Parse CSV data from a file, path, stream, resource or string
+ *
+ * @author: Jabran Rafique <hello@jabran.me>
+ * @version: 3.0.0
+ * @license: MIT License
+ * @link: https://github.com/jabranr/csv-parser
+ */
 
 namespace Jabran;
 
@@ -12,94 +23,69 @@ use Jabran\Exception\InvalidDataTypeException;
 use Jabran\Exception\InvalidResourceException;
 use Jabran\Exception\UnreadableResourceException;
 
-/**
- * CSV_Parser class
- *
- * Parse CSV data from a file, path, stream, resource or string
- *
- * @author: Jabran Rafique <hello@jabran.me>
- * @version: 2.1.1
- * @license: MIT License
- * @link: https://github.com/jabranr/csv-parser
- */
 class CSV_Parser {
 
 	const DEFAULT_ENCODING = 'UTF-8';
 
 	/* @var string $data */
-	protected $data;
+	protected $data = '';
 
 	/* @var string $encoding */
-	protected $encoding;
+	protected $encoding = '';
 
 	/* @var array $columns */
-	protected $columns;
+	protected $columns = [];
 
 	/* @var array $rows */
-	protected $rows;
+	protected $rows = [];
 
 	/* @var array $headers */
-	protected $headers;
+	protected $headers = [];
 
-	/**
-	 * Setup default values
-	 *
-	 * @return self
-	 */
+    /**
+     * CSV_Parser constructor
+     */
 	public function __construct() {
-		$this->setData(null);
-		$this->setEncoding(static::DEFAULT_ENCODING);
-		$this->setHeaders(null);
-		$this->setRows(null);
-		$this->setColumns(null);
-		return $this;
+		$this->encoding = static::DEFAULT_ENCODING;
 	}
 
-	/**
-	 * Set data
-	 *
-	 * @param string $data
-	 * @throws Jabran\Exception\InvalidArgumentException
-	 * @throws Jabran\Exception\InvalidDataException
-	 * @return self
-	 */
-	public function setData($data = null) {
-		if (func_num_args() < 1) {
-			throw new InvalidArgumentException('Required arguments are missing.');
-		}
-
-		if (null !== $data && !is_string($data)) {
-			throw new InvalidDataException('Unexpected data.');
+    /**
+     * Set data
+     *
+     * @param null $data
+     *
+     * @return CSV_Parser
+     * @throws InvalidDataException
+     */
+	public function setData($data) : self {
+		if (!is_string($data)) {
+			throw new InvalidDataException('Unexpected data');
 		}
 
 		$this->data = $data;
 		return $this;
 	}
 
-	/**
-	 * Get data
-	 *
-	 * @return string|null
-	 */
-	public function getData() {
+    /**
+     * Get data
+     *
+     * @return string
+     */
+	public function getData() : string {
 		return $this->data;
 	}
 
-	/**
-	 * Set encoding
-	 *
-	 * @param string $encoding
-	 * @throws Jabran\Exception\InvalidArgumentException
-	 * @throws Jabran\Exception\InvalidEncodingException
-	 * @return self
-	 */
-	public function setEncoding($encoding = null) {
-	    if (func_num_args() < 1) {
-			throw new InvalidArgumentException('Required arguments are missing.');
-	    }
-
-	    if (null !== $encoding && !is_string($encoding)) {
-			throw new InvalidEncodingException('Unexpected encoding.');
+    /**
+     * Set encoding
+     *
+     * @param null $encoding
+     *
+     * @return CSV_Parser
+     * @throws InvalidEncodingException
+     */
+	public function setEncoding($encoding) : self {
+	    if (!is_string($encoding)) {
+			throw new InvalidEncodingException('Unexpected encoding');
 	    }
 
 	    if ($encoding != $this->_isValidEncoding($encoding)) {
@@ -113,27 +99,23 @@ class CSV_Parser {
 	/**
 	 * Get encoding
 	 *
-	 * @return string|null
+	 * @return string
 	 */
-	public function getEncoding() {
+	public function getEncoding() : string {
 		return $this->encoding;
 	}
 
-	/**
-	 * Set headers
-	 *
-	 * @param array $headers
-	 * @throws Jabran\Exception\InvalidArgumentException
-	 * @throws Jabran\Exception\InvalidDataException
-	 * @return self
-	 */
-	public function setHeaders($headers = null) {
-		if (func_num_args() < 1) {
-			throw new InvalidArgumentException('Required arguments are missing.');
-		}
-
-		if (null !== $headers && !is_array($headers)) {
-			throw new InvalidDataException('Unexpected headers data.');
+    /**
+     * Set headers
+     *
+     * @param null $headers
+     *
+     * @return CSV_Parser
+     * @throws InvalidDataException
+     */
+	public function setHeaders($headers) : self {
+		if (!is_array($headers)) {
+			throw new InvalidDataException('Unexpected headers data');
 		}
 
 		$headers = $this->trimRecursively($headers);
@@ -144,27 +126,23 @@ class CSV_Parser {
 	/**
 	 * Get headers
 	 *
-	 * @return array|null
+	 * @return array
 	 */
-	public function getHeaders() {
+	public function getHeaders() : array {
 		return $this->headers;
 	}
 
-	/**
-	 * Set columns
-	 *
-	 * @param array $columns
-	 * @throws Jabran\Exception\InvalidArgumentException
-	 * @throws Jabran\Exception\InvalidDataException
-	 * @return self
-	 */
-	public function setColumns($columns = null) {
-		if (func_num_args() < 1) {
-			throw new InvalidArgumentException('Required arguments are missing.');
-		}
-
-		if (null !== $columns && !is_array($columns)) {
-			throw new InvalidDataException('Unexpected columns data.');
+    /**
+     * Set columns
+     *
+     * @param null $columns
+     *
+     * @return CSV_Parser
+     * @throws InvalidDataException
+     */
+	public function setColumns($columns) : self {
+		if (!is_array($columns)) {
+			throw new InvalidDataException('Unexpected columns data');
 		}
 
 		$columns = $this->trimRecursively($columns);
@@ -175,8 +153,8 @@ class CSV_Parser {
 	/**
 	 * Trim data recursively
 	 *
-	 * @param mixed $data
-	 * @return mixed
+	 * @param array|string $data
+	 * @return array|string
 	 */
 	public function trimRecursively($data) {
 		if (!is_string($data) && !is_array($data)) {
@@ -193,27 +171,23 @@ class CSV_Parser {
 	/**
 	 * Get columns
 	 *
-	 * @return array|null
+	 * @return array
 	 */
-	public function getColumns() {
+	public function getColumns() : array {
 		return $this->columns;
 	}
 
-	/**
-	 * Set rows
-	 *
-	 * @param array $rows
-	 * @throws Jabran\Exception\InvalidArgumentException
-	 * @throws Jabran\Exception\InvalidDataException
-	 * @return self
-	 */
-	public function setRows($rows = null) {
-		if (func_num_args() < 1) {
-			throw new InvalidArgumentException('Required arguments are missing.');
-		}
-
-		if (null !== $rows && !is_array($rows)) {
-			throw new InvalidDataException('Unexpected rows data.');
+    /**
+     * Set rows
+     *
+     * @param null $rows
+     *
+     * @return CSV_Parser
+     * @throws InvalidDataException
+     */
+	public function setRows($rows) : self {
+		if (!is_array($rows)) {
+			throw new InvalidDataException('Unexpected rows data');
 		}
 
 		$rows = $this->trimRecursively($rows);
@@ -224,41 +198,28 @@ class CSV_Parser {
 	/**
 	 * Get rows
 	 *
-	 * @return array|null
+	 * @return array
 	 */
-	public function getRows() {
+	public function getRows() : array {
 		return $this->rows;
 	}
 
-	/**
-	 * Get data from a file
-	 *
-	 * @param string $file
-	 * @throws Jabran\Exception\InvalidPathException
-	 * @throws Jabran\Exception\InvalidAccessException
-	 * @return self
-	 * @todo Eventually deprecate in favor of fromPath method
-	 */
-	public function fromFile($file = null) {
-		return $this->fromPath($file);
-	}
-
-	/**
-	 * Get data from a path
-	 *
-	 * @param string $path
-	 * @throws Jabran\Exception\InvalidPathException
-	 * @throws Jabran\Exception\InvalidAccessException
-	 * @return self
-	 * @since 2.0.2
-	 */
-	public function fromPath($path = null) {
-		if (null === $path || !is_string($path)) {
-			throw new InvalidPathException('Invalid resource path.');
+    /**
+     * Get data from a path
+     *
+     * @param string $path
+     *
+     * @return CSV_Parser
+     * @throws InvalidPathException
+     * @throws InvalidAccessException
+     */
+	public function fromPath($path) : self {
+		if (!is_string($path)) {
+			throw new InvalidPathException('Invalid resource path');
 		}
 
 		if (!file_exists($path) || !is_readable($path)) {
-			throw new InvalidAccessException('Unable to retrieve the resource.');
+			throw new InvalidAccessException('Unable to retrieve the resource');
 		}
 
 		$streamContext = stream_context_create(array(
@@ -277,68 +238,59 @@ class CSV_Parser {
 		return $this->fromString($content);
 	}
 
-	/**
-	 * Get data from string
-	 *
-	 * @param string $string
-	 * @throws Jabran\Exception\InvalidDataTypeException
-	 * @throws Jabran\Exception\EmptyResourceException
-	 * @return self
-	 */
-	public function fromString($string = null) {
-		if (null === $string || !is_string($string)) {
-			throw new InvalidDataTypeException('Invalid or unexpected data.');
+    /**
+     * Get data from string
+     *
+     * @param string $str
+     *
+     * @return CSV_Parser
+     * @throws EmptyResourceException
+     * @throws InvalidArgumentException
+     * @throws InvalidDataException
+     * @throws InvalidDataTypeException
+     */
+	public function fromString($str) : self {
+		if (!is_string($str)) {
+			throw new InvalidDataTypeException('Invalid or unexpected data');
 		}
 
-		if (empty($string)) {
-			throw new EmptyResourceException('No data in resource.');
+		if (empty($str)) {
+			throw new EmptyResourceException('No data in resource');
 		}
 
-		$this->setData($string);
+		$this->setData($str);
 		return $this;
 	}
 
-	/**
-	 * Get data from PHP stream
-	 *
-	 * @param resource $stream
-	 * @throws Jabran\Exception\InvalidResourceException
-	 * @return self
-	 * @todo Eventually deprecate in favor of fromResource method
-	 */
-	public function fromStream($stream = null) {
-		return $this->fromResource($stream);
-	}
-
-	/**
-	 * Get data from a resource
-	 *
-	 * @param resource $resource
-	 * @throws Jabran\Exception\InvalidResourceException
-	 * @return self
-	 * @since 2.0.2
-	 */
-	public function fromResource($resource = null) {
-		if (null === $resource || !is_resource($resource)) {
-			throw new InvalidResourceException('Invalid or unexpected resource.');
+    /**
+     * Get data from a resource
+     *
+     * @param null $resource
+     *
+     * @return CSV_Parser
+     * @throws InvalidResourceException
+     * @throws UnreadableResourceException
+     */
+	public function fromResource($resource) : self {
+		if (!is_resource($resource)) {
+			throw new InvalidResourceException('Invalid or unexpected resource');
 		}
 
-		$content = stream_get_contents($resource);
-
-		if (false === $content) {
-			throw new UnreadableResourceException('Unable to read data from resource.');
+		if (false === ($content = stream_get_contents($resource))) {
+			throw new UnreadableResourceException('Unable to read data from resource');
 		}
 
 		return $this->fromString($content);
 	}
 
-	/**
-	 * Parse data
-	 *
-	 * @param boolean $headers
-	 * @return array
-	 */
-	public function parse($headers = true) {
+    /**
+     * Parse data
+     *
+     * @param bool $headers
+     *
+     * @return array
+     */
+	public function parse($headers = true) : array {
 		if (null === $this->getData()) {
 			return array();
 		}
@@ -353,13 +305,15 @@ class CSV_Parser {
 		return $this->getRows();
 	}
 
-	/**
-	 * Convert character encoding of data
-	 *
-	 * @throws Jabran\Exception\InvalidEncodingException
-	 * @return self
-	 */
-	public function encode() {
+    /**
+     * Convert character encoding of data
+     *
+     * @return CSV_Parser
+     * @throws InvalidArgumentException
+     * @throws InvalidDataException
+     * @throws InvalidEncodingException
+     */
+	public function encode() : self {
 	    $data = $this->getData();
 	    $encodedData = mb_convert_encoding($data, $this->getEncoding(), mb_detect_encoding($this->getData()));
 	    $this->setData($encodedData);
@@ -373,12 +327,14 @@ class CSV_Parser {
 	    return $this;
 	}
 
-	/**
-	 * Split data for line breaks to make columns
-	 *
-	 * @return self
-	 */
-	private function _makeColumns() {
+    /**
+     * Split data for line breaks to make columns
+     *
+     * @return CSV_Parser
+     * @throws InvalidArgumentException
+     * @throws InvalidDataException
+     */
+	private function _makeColumns() : self {
 		$data = $this->getData();
 
 		if (preg_match('/[^\x20-\x7f]/', $data)) {
@@ -393,16 +349,18 @@ class CSV_Parser {
 		return $this;
 	}
 
-	/**
-	 * Make an optional header row
-	 *
-	 * @return self
-	 */
-	private function _makeRowsWithHeaders() {
+    /**
+     * Make an optional header row
+     *
+     * @return CSV_Parser
+     * @throws InvalidArgumentException
+     * @throws InvalidDataException
+     */
+	private function _makeRowsWithHeaders() : self {
 		$columns = $this->getColumns();
 
 		if ( count($columns) < 1 ) {
-			return array();
+			return $this;
 		}
 
 		$rowsWithHeader = array();
@@ -424,12 +382,14 @@ class CSV_Parser {
 		return $this;
 	}
 
-	/**
-	 * Make rows
-	 *
-	 * @return self
-	 */
-	private function _makeRows() {
+    /**
+     * Make rows
+     *
+     * @return $this
+     * @throws InvalidArgumentException
+     * @throws InvalidDataException
+     */
+	private function _makeRows() : self {
 		$columns = $this->getColumns();
 		$rows = array();
 
@@ -446,12 +406,14 @@ class CSV_Parser {
 		return $this;
 	}
 
-	/**
-	 * Validate character encoding
-	 *
-	 * @return boolean
-	 */
-	private function _isValidEncoding($encoding = null) {
+    /**
+     * Validate character encoding
+     *
+     * @param string $encoding
+     *
+     * @return bool
+     */
+	private function _isValidEncoding($encoding) : bool {
 	    return in_array($encoding, mb_list_encodings());
 	}
 }

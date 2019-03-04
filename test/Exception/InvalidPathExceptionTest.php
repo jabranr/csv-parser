@@ -1,16 +1,14 @@
 <?php namespace Jabran\Tests\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Jabran\Exception\InvalidPathException;
 
 /**
  * InvalidPathException
  */
-class InvalidPathExceptionTest extends \PHPUnit_Framework_TestCase {
-
-	/**
-	 * @expectedException Jabran\Exception\InvalidPathException
-	 */
-	public function testMatchException() {
+class InvalidPathExceptionTest extends TestCase {
+    public function testMatchException() {
+        $this->expectException(InvalidPathException::class);
 		throw new InvalidPathException('foo');
 	}
 }

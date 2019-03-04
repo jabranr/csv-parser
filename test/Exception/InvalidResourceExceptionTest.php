@@ -1,16 +1,14 @@
 <?php namespace Jabran\Tests\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Jabran\Exception\InvalidResourceException;
 
 /**
  * InvalidResourceException
  */
-class InvalidResourceExceptionTest extends \PHPUnit_Framework_TestCase {
-
-	/**
-	 * @expectedException Jabran\Exception\InvalidResourceException
-	 */
-	public function testMatchException() {
+class InvalidResourceExceptionTest extends TestCase {
+    public function testMatchException() {
+        $this->expectException(InvalidResourceException::class);
 		throw new InvalidResourceException('foo');
 	}
 }

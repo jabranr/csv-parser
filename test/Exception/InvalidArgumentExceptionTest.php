@@ -1,16 +1,14 @@
 <?php namespace Jabran\Tests\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Jabran\Exception\InvalidArgumentException;
 
 /**
  * InvalidArgumentException
  */
-class InvalidArgumentExceptionTest extends \PHPUnit_Framework_TestCase {
-
-	/**
-	 * @expectedException Jabran\Exception\InvalidArgumentException
-	 */
-	public function testMatchException() {
+class InvalidArgumentExceptionTest extends TestCase {
+    public function testMatchException() {
+        $this->expectException(InvalidArgumentException::class);
 		throw new InvalidArgumentException('foo');
 	}
 }
